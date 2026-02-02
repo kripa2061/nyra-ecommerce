@@ -1,0 +1,225 @@
+/* ================= HEADER ================= */
+body{
+    background-color: #faf7f5;
+}
+.header {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.header-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.header-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.25),
+    rgba(0, 0, 0, 0.05)
+  );
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 10%;
+}
+
+.header-content {
+  max-width: 460px;
+  color: #f6f1ef;
+}
+
+.header-content p {
+  font-family: "Playfair Display", serif;
+  font-size: 54px;
+  line-height: 1.2;
+  margin-bottom: 14px;
+  text-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+.header-content span {
+  display: block;
+  font-family: "Poppins", sans-serif;
+  font-size: 17px;
+  letter-spacing: 0.8px;
+  opacity: 0.9;
+}
+
+.header-btn {
+  margin-top: 26px;
+  padding: 12px 30px;
+  background: transparent;
+  border: 1px solid #f2c6cf;
+  color: #f2c6cf;
+  font-size: 14px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.header-btn:hover {
+  background-color: #f2c6cf;
+  color: #2a2a2a;
+}
+
+/* ================= ABOUT US ================= */
+/* ===== ABOUT US ===== */
+.about-us-image {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  padding: 100px 12%;
+  background-color: #faf7f5;
+  box-sizing: border-box;
+  flex-wrap: wrap;
+}
+
+.about-us-image img {
+  flex: 1;
+  max-width: 400px; /* adjust image size */
+  border-radius: 20px;
+  box-shadow: 0 12px 30px rgba(242, 198, 207, 0.25);
+  transition: transform 0.3s ease;
+}
+
+.about-us-image img:hover {
+  transform: scale(1.03);
+}
+
+.about-us-image h2,
+.about-us-image p {
+  flex: 1;
+  min-width: 280px;
+}
+
+.about-us-image h2 {
+  font-family: "Playfair Display", serif;
+  font-size: 40px;
+  color: #2a2a2a;
+  margin-bottom: 20px;
+}
+
+.about-us-image p {
+  font-family: "Poppins", sans-serif;
+  font-size: 16px;
+  line-height: 1.9;
+  color: #5a5a5a;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+  .about-us-image {
+    flex-direction: column-reverse;
+    text-align: center;
+  }
+
+  .about-us-image img,
+  .about-us-image h2,
+  .about-us-image p {
+    width: 100%;
+    flex: unset;
+  }
+}
+
+
+/* ===== HIGHLIGHTS ===== */
+.highlights {
+   
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 40px;
+  justify-items: center;
+  padding: 0 12%;
+}
+
+.highlight-card {
+  background-color: #ffffff;
+  padding: 55px 55px;
+  border-radius: 20px;
+  box-shadow: 0 12px 30px rgba(242, 198, 207, 0.25); /* soft pink shadow */
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  text-align: center;
+}
+
+.highlight-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(242, 198, 207, 0.35);
+}
+
+.highlight-card img {
+  width: 64px;
+  height: 64px;
+  background: rgba(242, 198, 207, 0.2);
+  padding: 15px;
+  border-radius: 50%;
+  margin-bottom: 20px;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.highlight-card:hover img {
+  transform: scale(1.15);
+  background: rgba(242, 198, 207, 0.35);
+}
+
+.highlight-card p:first-of-type {
+  font-family: "Playfair Display", serif;
+  font-size: 20px;
+  color: #2a2a2a;
+  margin-bottom: 10px;
+}
+
+.highlight-card p:last-of-type {
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+  color: #6a6a6a;
+  letter-spacing: 0.5px;
+  line-height: 1.6;
+}
+
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 900px) {
+  .highlights {
+    grid-template-columns: 1fr;
+  }
+
+  .about-us {
+    padding: 70px 6%;
+  }
+
+  .about-us > h2 {
+    font-size: 32px;
+  }
+
+  .about-us section h2 {
+    font-size: 24px;
+  }
+}
+.about-us > h2::after,
+.about-us section h2::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 2px;
+  background-color: #f2c6cf;
+  margin: 18px auto 0;
+}
+.highlight-card img {
+  background: rgba(242, 198, 207, 0.25);
+  padding: 14px;
+  border-radius: 50%;
+}
+.highlight-card:hover img {
+  transform: scale(1.1);
+  transition: transform 0.3s ease;
+}
+.classy-image{
+  height: 120px;
+}
