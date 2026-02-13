@@ -3,9 +3,13 @@ import dotenv from "dotenv";
 dotenv.config();
 import cors from "cors";
 import connectDB from "./Config/db.js";
+
 import productRouter from "./Router/productRoute.js";
 import fileUpload from 'express-fileupload';
 
+
+
+import authRoutes from "./src/routes/authRoutes.js";
 
 
 connectDB();
@@ -17,9 +21,14 @@ app.use(cors({
   credentials: true
 }));
 app.use(express.json());
+
 app.use(fileUpload());
+
+app.use("/api/auth", authRoutes);
+
+
 app.get("/", (req, res) => {
-  res.send("API is running 🚀");
+  res.send("API is running ");
 });
 app.use("/api/product",productRouter)
 
