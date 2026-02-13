@@ -28,7 +28,7 @@ const Header = () => {
           suggestions all in one app.
 
         </p>
-    <img src={assets.classy}/>
+    {/* <img src={assets.classy}/> */}
 </div>
 
         <section>

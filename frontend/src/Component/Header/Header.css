@@ -127,7 +127,11 @@ body{
   }
 }
 
-
+.about-us h2{
+  display: block;
+  text-align: center;
+    font-family: "Playfair Display", serif;
+}
 /* ===== HIGHLIGHTS ===== */
 .highlights {
    
@@ -200,6 +204,8 @@ body{
 
   .about-us section h2 {
     font-size: 24px;
+    display: flex;
+    
   }
 }
 .about-us > h2::after,
@@ -210,6 +216,7 @@ body{
   height: 2px;
   background-color: #f2c6cf;
   margin: 18px auto 0;
+
 }
 .highlight-card img {
   background: rgba(242, 198, 207, 0.25);
