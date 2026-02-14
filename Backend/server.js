@@ -2,9 +2,9 @@ import express from "express";
 import dotenv from "dotenv";
 dotenv.config();
 import cors from "cors";
-import connectDB from "./Config/db.js";
+import connectDB from "./src/config/db.js";
 
-import productRouter from "./Router/productRoute.js";
+import productRouter from "./src/routes/productRouter.js";
 import fileUpload from 'express-fileupload';
 
 
