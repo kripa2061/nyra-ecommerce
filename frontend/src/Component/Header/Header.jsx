@@ -27,15 +27,9 @@ const Header = () => {
             and mood. Curated outfits, seasonal collections, and personalized
             suggestions all in one app.
 
-<<<<<<< Updated upstream
-        </p>
-    {/* <img src={assets.classy}/> */}
-</div>
-=======
           </p>
           <img src={assets.classy} />
         </div>
->>>>>>> Stashed changes
 
         <section>
           <h2>Our Highlights</h2>
