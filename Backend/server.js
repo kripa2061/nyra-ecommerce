@@ -10,6 +10,7 @@ import fileUpload from 'express-fileupload';
 
 
 import authRoutes from "./src/routes/authRoutes.js";
+import orderRouter from "./src/routes/orderRoutes.js";
 
 
 connectDB();
@@ -27,12 +28,13 @@ app.use(fileUpload({
     createParentPath: true
 }));
 app.use("/api/auth", authRoutes);
-
+app.use("/api/product",productRouter)
+app.use("/api/order",orderRouter)
 
 app.get("/", (req, res) => {
   res.send("API is running ");
 });
-app.use("/api/product",productRouter)
+
 
 
 const PORT = process.env.PORT || 5000;

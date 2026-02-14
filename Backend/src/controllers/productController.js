@@ -1,4 +1,4 @@
-import productModel from '../models/productMode.js';
+import productModel from '../models/productModel.js';
 import supabase from '../config/supabase.js';
 
 const addProduct = async (req, res) => {
