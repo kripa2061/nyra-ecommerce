@@ -20,10 +20,10 @@ const Navbar = () => {
 
         {/* Menu */}
         <ul className="navbar-menu">
-          <li>Home</li>
-          <li>Products</li>
-          <li>New Arrivals</li>
-          <li>Offers</li>
+          <li>HOME</li>
+          <li>PRODUCTS</li>
+          <li>NEW ARRIVALS</li>
+          <li>OFFERS</li>
         </ul>
 
         {/* Right actions */}
