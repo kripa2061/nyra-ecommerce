@@ -21,21 +21,27 @@ const Header = () => {
       {/* ABOUT US */}
       <div className="about-us">
         <div className="about-us-image">
-        <h2>Discover Your Perfect Styles</h2>
-        <p>
-          Nyra helps you explore fashion that suits your personality, body type,
-          and mood. Curated outfits, seasonal collections, and personalized
-          suggestions all in one app.
+          <h2>Discover Your Perfect Styles</h2>
+          <p>
+            Nyra helps you explore fashion that suits your personality, body type,
+            and mood. Curated outfits, seasonal collections, and personalized
+            suggestions all in one app.
 
+<<<<<<< Updated upstream
         </p>
     {/* <img src={assets.classy}/> */}
 </div>
+=======
+          </p>
+          <img src={assets.classy} />
+        </div>
+>>>>>>> Stashed changes
 
         <section>
-         <h2>Our Highlights</h2>
+          <h2>Our Highlights</h2>
 
           <div className="highlights">
-      
+
             <div className="highlight-card">
               <img src={assets.hanger} alt="Personalized Outfits" />
               <p>Personalized Outfits</p>
@@ -43,7 +49,7 @@ const Header = () => {
             </div>
 
             <div className="highlight-card">
-              <img src={assets.love} alt="Style Inspiration" />
+              <img src={assets.love2} alt="Style Inspiration" />
               <p>Style Inspiration</p>
               <p>Trendy looks & tips</p>
             </div>
@@ -52,6 +58,12 @@ const Header = () => {
               <img src={assets.collection} alt="Seasonal Collections" />
               <p>Seasonal Collections</p>
               <p>Curated for every season</p>
+            </div>
+            
+            <div className="highlight-card">
+              <img src={assets.gift} alt="Gift Wrapping" />
+              <p>Gift Wrapping</p>
+              <p>Perfect for your loved ones</p>
             </div>
           </div>
         </section>
