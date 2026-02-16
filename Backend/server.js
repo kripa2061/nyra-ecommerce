@@ -10,27 +10,31 @@ import fileUpload from 'express-fileupload';
 
 
 import authRoutes from "./src/routes/authRoutes.js";
+import orderRouter from "./src/routes/orderRoutes.js";
 
 
 connectDB();
 
 const app = express();
 
+
 app.use(cors({
   origin: "http://localhost:5173",
   credentials: true
 }));
 app.use(express.json());
-
-app.use(fileUpload());
-
+app.use(express.urlencoded({ extended: true }));
+app.use(fileUpload({
+    createParentPath: true
+}));
 app.use("/api/auth", authRoutes);
-
+app.use("/api/product",productRouter)
+app.use("/api/order",orderRouter)
 
 app.get("/", (req, res) => {
   res.send("API is running ");
 });
-app.use("/api/product",productRouter)
+
 
 
 const PORT = process.env.PORT || 5000;
