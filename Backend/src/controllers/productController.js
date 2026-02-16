@@ -61,42 +61,42 @@ const addProduct = async (req, res) => {
 
 
 const getProducts = async (req, res) => {
-    try {
-        const products = await productModel.find({});
-        return res.status(200).json({ data: products });
-    } catch (error) {
-        return res.status(500).json({ message: error.message });
-    }
+  try {
+    const products = await productModel.find({});
+    return res.status(200).json({ data: products });
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
 }
 
 const getProductByID = async (req, res) => {
-    try {
-        const id = req.params.id;
-        const product = await productModel.findById(id);
-        if (!product) {
-            return res.status(400).json({ message: "No product available" });
-        }
-        return res.status(200).json({ data: product });
-    } catch (error) {
-        return res.status(500).json({ message: error.message });
+  try {
+    const id = req.params.id;
+    const product = await productModel.findById(id);
+    if (!product) {
+      return res.status(400).json({ message: "No product available" });
     }
+    return res.status(200).json({ data: product });
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
 }
 
 const removeProduct = async (req, res) => {
-    try {
-        const product = await productModel.findByIdAndDelete(req.params.id);
-        if (!product) {
-            return res.status(400).json({ message: "No product available" });
-        }
-        return res.status(200).json({ message: "Product deleted" });
-    } catch (error) {
-        return res.status(500).json({ message: error.message });
+  try {
+    const product = await productModel.findByIdAndDelete(req.params.id);
+    if (!product) {
+      return res.status(400).json({ message: "No product available" });
     }
+    return res.status(200).json({ message: "Product deleted" });
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
 }
 
 export default {
-    addProduct,
-    getProducts,
-    getProductByID,
-    removeProduct
+  addProduct,
+  getProducts,
+  getProductByID,
+  removeProduct
 };
