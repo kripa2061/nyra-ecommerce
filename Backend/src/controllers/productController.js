@@ -5,61 +5,46 @@ const addProduct = async (req, res) => {
   try {
     console.log("=== New Add Product Request ===");
     console.log("req.body:", req.body);
-    console.log("req.files:", req.files);
+    console.log("req.files:", req.files); // Multer populates this
 
     const { name, description, price, category, fabric, sizes, colors, stock } = req.body;
 
-  
     if (!name || !price || !description || !category) {
       return res.status(400).json({ message: "Missing required fields" });
     }
 
-    if (!req.files || Object.keys(req.files).length === 0) {
+    if (!req.files || req.files.length === 0) {
       return res.status(400).json({ message: "No images uploaded" });
     }
 
-    const uploadedFiles = Array.isArray(req.files.images)
-      ? req.files.images
-      : req.files.images ? [req.files.images] : [];
-
     const images = [];
 
-    for (let file of uploadedFiles) {
-      console.log("Uploading file:", file.name);
+    for (let file of req.files) {
+      console.log("Uploading file:", file.originalname);
 
-      const fileName = `images/${Date.now()}_${file.name}`;
+      const fileName = `images/${Date.now()}_${file.originalname}`;
 
       // Upload file to Supabase
       const { data, error } = await supabase.storage
         .from("products")
-        .upload(fileName, file.data, {
+        .upload(fileName, file.buffer, {  // note: file.buffer, not file.data
           cacheControl: "3600",
           upsert: false,
           contentType: file.mimetype
         });
-
-
 
       if (error) {
         console.error("Supabase upload error:", error);
         return res.status(500).json({ message: "Error uploading image to Supabase", error });
       }
 
-      const { data: urlData, error: urlError } = supabase.storage
-        .from("products")
-        .getPublicUrl(fileName);
-
-      if (urlError) {
-        console.error("Supabase getPublicUrl error:", urlError);
-      }
-
-      console.log("Supabase public URL:", urlData.publicUrl);
-
+      const { data: urlData } = supabase.storage.from("products").getPublicUrl(fileName);
       images.push(urlData.publicUrl);
+      console.log("Supabase public URL:", urlData.publicUrl);
     }
 
-    const sizesArray = Array.isArray(sizes) ? sizes : sizes?.split(',').map(s => s.trim()) || [];
-    const colorsArray = Array.isArray(colors) ? colors : colors?.split(',').map(c => c.trim()) || [];
+    const sizesArray = sizes ? sizes.split(",").map(s => s.trim()) : [];
+    const colorsArray = colors ? colors.split(",").map(c => c.trim()) : [];
     const numericPrice = Number(price);
     const numericStock = Number(stock) || 0;
 
