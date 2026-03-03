@@ -2,7 +2,7 @@ import categoryModel from "../models/categoryModel.js";
 import supabase from "../config/supabase.js";
 
 // Add Category
-export const addCategory = async (req, res) => {
+export const addCategory = async (req, res,next) => {
  try {
     const { name, description } = req.body;
 
@@ -39,12 +39,12 @@ export const addCategory = async (req, res) => {
 
   } catch (error) {
     console.error("Add category error:", error);
-    res.status(500).json({ message: error.message });
+   next(error);
   }
 };
 
 // Get Categories
-export const getCategory = async (req, res) => {
+export const getCategory = async (req, res,next) => {
   try {
     const categories = await categoryModel.find({});
     if (categories.length === 0)
@@ -52,24 +52,24 @@ export const getCategory = async (req, res) => {
 
     res.status(200).json({ data: categories });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+       next(error);
   }
 };
 
 // Delete Category
-export const deleteCategory = async (req, res) => {
+export const deleteCategory = async (req, res,next) => {
   try {
     const category = await categoryModel.findByIdAndDelete(req.params.id);
     if (!category) return res.status(404).json({ message: "Category not found" });
 
     res.status(200).json({ message: "Category deleted successfully"});
   } catch (error) {
-    res.status(500).json({ message: error.message });
+      next(error);
   }
 };
 
 // Update Category
-export const updateCategory = async (req, res) => {
+export const updateCategory = async (req, res,next) => {
   try {
     const { name, description } = req.body;
     let imageUrl;
@@ -99,7 +99,7 @@ export const updateCategory = async (req, res) => {
 
     res.status(200).json({ message: "Category updated successfully", data: updatedCategory });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+       next(error);
   }
 };
 

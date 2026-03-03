@@ -24,7 +24,7 @@ const sendOTPEmail = async (email, otp) => {
     });
 };
 
-export const register = async (req, res) => {
+export const register = async (req, res,next) => {
     try {
         const { name, email, password } = req.body;
         const existingUser = await User.findOne({ email });
@@ -44,11 +44,11 @@ export const register = async (req, res) => {
         await sendOTPEmail(email, otp);
         res.status(201).json({ message: "Registered successfully. Verify OTP." });
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        next(error);
     }
 };
 
-export const verifyOTP = async (req, res) => {
+export const verifyOTP = async (req, res,next) => {
     try {
         const { email, otp } = req.body;
         const user = await User.findOne({ email });
@@ -64,11 +64,11 @@ export const verifyOTP = async (req, res) => {
 
         res.json({ message: "Account verified successfully" });
     } catch (error) {
-        res.status(500).json({ message: error.message });
+         next(error);
     }
 };
 
-export const login = async (req, res) => {
+export const login = async (req, res,next) => {
     try {
         const { email, password } = req.body;
         const user = await User.findOne({ email });
@@ -82,6 +82,6 @@ export const login = async (req, res) => {
         const token = generateToken({ id: user._id, role: user.role });
         res.json({ message: "Login successful", token });
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        next(error);
     }
 };

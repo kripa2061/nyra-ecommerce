@@ -1,5 +1,5 @@
 import productModel from "../models/productModel.js";
-const addReview=async(req,res)=>{
+const addReview=async(req,res,next)=>{
     try {
         const{productId,userId,rating,comment}=req.body;
         if(!productId||!rating||!comment){
@@ -13,10 +13,10 @@ const addReview=async(req,res)=>{
     await product.save();
     return res.status(200).json({ message: "Review added successfully"})
     } catch (error) {
-    return res.status(500).json({ message: error.message });  
+       next(error);
     }
 }
-const getReviews = async (req, res) => {
+const getReviews = async (req, res,next) => {
   try {
     const { productId } = req.params;
     const product = await productModel.findById(productId);
@@ -24,10 +24,10 @@ const getReviews = async (req, res) => {
 
     return res.status(200).json({ reviews: product.review });
   } catch (error) {
-    return res.status(500).json({ message: error.message });
+    next(error);
   }
 }
-const deleteReview = async (req, res) => {
+const deleteReview = async (req, res,next) => {
   try {
     const { productId, reviewId } = req.params;
     const product = await productModel.findById(productId);
@@ -46,7 +46,7 @@ const deleteReview = async (req, res) => {
       reviews: product.review,
     });
   } catch (error) {
-    return res.status(500).json({ message: error.message });
+      next(error);
   }
 };
 

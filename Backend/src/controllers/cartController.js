@@ -3,7 +3,7 @@ import Product from "../models/productModel.js";
 
 
 //  Add to Cart
-export const addToCart = async (req, res) => {
+export const addToCart = async (req, res,next) => {
     try {
         const { productId, quantity } = req.body;
         const userId = req.user.id;
@@ -33,13 +33,13 @@ export const addToCart = async (req, res) => {
         res.status(200).json(cart);
 
     } catch (error) {
-        res.status(500).json({ message: error.message });
+         next(error);
     }
 };
 
 
 //  Get Cart
-export const getCart = async (req, res) => {
+export const getCart = async (req, res,next) => {
     try {
         const userId = req.user.id;
 
@@ -53,13 +53,13 @@ export const getCart = async (req, res) => {
         res.status(200).json(cart);
 
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        next(error);
     }
 };
 
 
 //  Remove Item
-export const removeFromCart = async (req, res) => {
+export const removeFromCart = async (req, res,next) => {
     try {
         const userId = req.user.id;
         const { productId } = req.params;
@@ -78,13 +78,13 @@ export const removeFromCart = async (req, res) => {
         res.status(200).json(cart);
 
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        next(error);
     }
 };
 
 
 //  Clear Cart
-export const clearCart = async (req, res) => {
+export const clearCart = async (req, res,next) => {
     try {
         const userId = req.user.id;
 
@@ -96,6 +96,6 @@ export const clearCart = async (req, res) => {
         res.status(200).json({ message: "Cart cleared" });
 
     } catch (error) {
-        res.status(500).json({ message: error.message });
+       next(error);
     }
 };

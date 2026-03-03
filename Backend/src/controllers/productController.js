@@ -1,11 +1,8 @@
 import productModel from '../models/productModel.js';
 import supabase from '../config/supabase.js';
 
-const addProduct = async (req, res) => {
+const addProduct = async (req, res,next) => {
   try {
-    console.log("=== New Add Product Request ===");
-    console.log("req.body:", req.body);
-    console.log("req.files:", req.files); // Multer populates this
 
     const { name, description, price, category, fabric, sizes, colors, stock } = req.body;
 
@@ -65,24 +62,24 @@ const addProduct = async (req, res) => {
 
   } catch (error) {
     console.error("Add product error:", error);
-    return res.status(500).json({ message: error.message });
+    next(error);
   }
 };
 
 
 
 
-const getProducts = async (req, res) => {
+const getProducts = async (req, res,next) => {
   try {
     const products = await productModel.find({});
     return res.status(200).json({ data: products });
   } catch (error) {
-    return res.status(500).json({ message: error.message });
+   next(error);
   }
 };
 
 
-const getProductByID = async (req, res) => {
+const getProductByID = async (req, res,next) => {
   try {
     const id = req.params.id;
     const product = await productModel.findById(id);
@@ -91,11 +88,11 @@ const getProductByID = async (req, res) => {
     }
     return res.status(200).json({ data: product });
   } catch (error) {
-    return res.status(500).json({ message: error.message });
+      next(error);
   }
 };
 
-const removeProduct = async (req, res) => {
+const removeProduct = async (req, res,next) => {
   try {
     const product = await productModel.findByIdAndDelete(req.params.id);
     if (!product) {
@@ -103,7 +100,7 @@ const removeProduct = async (req, res) => {
     }
     return res.status(200).json({ message: "Product deleted successfully" });
   } catch (error) {
-    return res.status(500).json({ message: error.message });
+       next(error);
   }
 };
 

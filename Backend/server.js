@@ -9,6 +9,7 @@ import productRouter from "./src/routes/productRouter.js";
 import authRoutes from "./src/routes/authRoutes.js";
 import orderRouter from "./src/routes/orderRoutes.js";
 import categoryRouter from "./src/routes/categoryRoutes.js";
+import errorHandler from "./src/middleware/errorMiddleware.js";
 
 connectDB();
 
@@ -31,11 +32,10 @@ app.use("/api/auth", authRoutes);
 app.use("/api/product", productRouter);
 app.use("/api/order", orderRouter);
 app.use("/api/category", categoryRouter);
-
 // Test route
 app.get("/", (req, res) => {
   res.send("API is running");
 });
-
+app.use(errorHandler);
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

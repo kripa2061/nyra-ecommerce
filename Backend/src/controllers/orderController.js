@@ -2,7 +2,7 @@ import orderModel from "../models/orderModel.js";
 import axios from "axios";
 
 // Place a new order
-const placeOrder = async (req, res) => {
+const placeOrder = async (req, res,next) => {
   try {
     const { userId, items,   paymentStatus, amount, address } = req.body;
     if (!userId || !items || !amount || !address) {
@@ -21,46 +21,46 @@ const placeOrder = async (req, res) => {
     await order.save();
     return res.status(200).json({ message: "Order placed successfully", order });
   } catch (error) {
-    return res.status(500).json({ message: error.message });
+       next(error);
   }
 };
 
 // Get all orders
-const getOrders = async (req, res) => {
+const getOrders = async (req, res,next) => {
   try {
     const orders = await orderModel.find({}).sort({ date: -1 });
     return res.status(200).json({ data: orders });
   } catch (error) {
-    return res.status(500).json({ message: error.message });
+       next(error);
   }
 };
 
 // Get order by ID
-const getOrderById = async (req, res) => {
+const getOrderById = async (req, res,next) => {
   try {
     const id = req.params.id;
     const order = await orderModel.findById(id);
     if (!order) return res.status(404).json({ message: "Order not found" });
     return res.status(200).json({ data: order });
   } catch (error) {
-    return res.status(500).json({ message: error.message });
+       next(error);
   }
 };
 
 // Delete order by ID
-const removeOrder = async (req, res) => {
+const removeOrder = async (req, res,next) => {
   try {
     const id = req.params.id;
     const order = await orderModel.findByIdAndDelete(id);
     if (!order) return res.status(404).json({ message: "Order not found" });
     return res.status(200).json({ message: "Order deleted successfully" });
   } catch (error) {
-    return res.status(500).json({ message: error.message });
+     next(error);
   }
 };
 
 // Verify eSewa payment
-const verifyEsewaPayment = async (req, res) => {
+const verifyEsewaPayment = async (req, res,next) => {
   try {
     const { orderId, esewaAmt, esewaRefId } = req.body;
 
@@ -114,7 +114,7 @@ const verifyEsewaPayment = async (req, res) => {
 
   } catch (error) {
     console.error("Payment verification error:", error.message);
-    return res.status(500).json({ message: error.message });
+       next(error);
   }
 };
 
