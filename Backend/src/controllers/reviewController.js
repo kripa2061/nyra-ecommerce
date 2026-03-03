@@ -30,17 +30,21 @@ const getReviews = async (req, res) => {
 const deleteReview = async (req, res) => {
   try {
     const { productId, reviewId } = req.params;
-
     const product = await productModel.findById(productId);
     if (!product) return res.status(404).json({ message: "Product not found" });
 
-    const reviewIndex = product.review.findIndex(r => r._id.toString() === reviewId);
-    if (reviewIndex === -1) return res.status(404).json({ message: "Review not found" });
-
-    product.review.splice(reviewIndex, 1);
+    const review = product.review.find(r => r._id.toString() === reviewId);
+    if (!review) return res.status(404).json({ message: "Review not found" });
+    if (review.user.toString() !== req.user._id.toString() && req.user.role !== "admin") {
+      return res.status(403).json({ message: "Not authorized to delete this review" });
+    }
+    product.review = product.review.filter(r => r._id.toString() !== reviewId);
     await product.save();
 
-    return res.status(200).json({ message: "Review deleted successfully", reviews: product.review });
+    return res.status(200).json({
+      message: "Review deleted successfully",
+      reviews: product.review,
+    });
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
