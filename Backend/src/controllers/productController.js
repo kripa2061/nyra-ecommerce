@@ -103,10 +103,25 @@ const removeProduct = async (req, res,next) => {
        next(error);
   }
 };
+const getProductsByCategory = async (req, res, next) => {
+  try {
+    const categoryName = req.params.category; // keep original
+    const products = await productModel.find({
+      category: { $regex: new RegExp(`^${categoryName}$`, 'i') } // case-insensitive
+    });
+    if (!products || products.length === 0) {
+      return res.status(404).json({ message: `No products found in ${categoryName}` });
+    }
+    return res.status(200).json({ data: products });
+  } catch (err) {
+    next(err);
+  }
+};
 
 export default {
   addProduct,
   getProducts,
   getProductByID,
-  removeProduct
+  removeProduct,
+ getProductsByCategory
 };

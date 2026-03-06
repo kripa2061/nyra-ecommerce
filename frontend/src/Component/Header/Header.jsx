@@ -1,6 +1,7 @@
 import React from "react";
 import { assets } from "../../assets/assets";
 import "./Header.css";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
@@ -13,7 +14,7 @@ const Header = () => {
           <div className="header-content">
             <p>Made to Be Worn Beautifully</p>
             <span>Effortless elegance, designed just for you.</span>
-            <button className="header-btn">Shop the Collection</button>
+           <Link to="/product"><button className="header-btn">Shop the Collection</button></Link> 
           </div>
         </div>
       </div>

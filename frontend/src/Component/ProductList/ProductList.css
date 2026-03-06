@@ -1,0 +1,23 @@
+/* ProductList.css */
+
+.product-list-wrapper {
+  padding: 30px;
+  background-color: #fff8fb; /* soft pastel background */
+  min-height: 100vh;
+}
+
+.product-list-title {
+  font-family: "Arial", sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #ff4d6d; /* girly accent */
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.product-list-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px; /* spacing between cards */
+}
