@@ -8,9 +8,9 @@ const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
 // Routes
-router.post("/addCategory", authMiddleware, roleMiddleware("admin"), upload.single("image"), addCategory);
+router.post("/addCategory", authMiddleware,   addCategory);
 router.put("/updateCategory/:id", authMiddleware, roleMiddleware("admin"), upload.single("image"), updateCategory);
-router.get("/getCategory", getCategory);
-router.delete("/deleteCategory/:id", authMiddleware, roleMiddleware("admin"), deleteCategory);
+router.get("/getCategory",authMiddleware, getCategory);
+router.delete("/deleteCategory/:id", deleteCategory);
 
 export default router;

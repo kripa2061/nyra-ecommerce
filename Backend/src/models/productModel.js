@@ -1,13 +1,13 @@
 import mongoose from "mongoose";
-const reviewSchema=new mongoose.Schema({
-    "userId":{type:String,required:true},
-    "rating":{
-        type:Number,
-        required:true
+const reviewSchema = new mongoose.Schema({
+    "userId": { type: String, required: true },
+    "rating": {
+        type: Number,
+        required: true
     },
-    "comment":{
-        type:String,
-        required:true
+    "comment": {
+        type: String,
+        required: true
     }
 })
 const productSchema = new mongoose.Schema({
@@ -26,13 +26,23 @@ const productSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    isNewArrival: {
+        type: Boolean,
+        default: false
+    },
+    isOffer: {
+        type: Boolean,
+        default: false
+    },
+      discountPercent: { type: Number, default: 0 },
     fabric: {
         type: String
     },
     review: [
-      reviewSchema
+        reviewSchema
     ],
     sizes: [String],
+
     colors: [String],
     stock: {
         type: Number,

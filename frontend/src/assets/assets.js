@@ -7,8 +7,10 @@ import collection from './shopping-bag.png'
 import love from './love.png'
 import gift from './gift-bow.png'
 import hanger from './hanger.png'
+import bow from './Singup.png'
 import classy from './Classy.jpg'
 import love2 from './romantic.png'
+
 export const assets={
     face,
     cart,
@@ -20,5 +22,6 @@ export const assets={
     gift,
     hanger,
     classy,
-    love2
+    love2,
+    bow
 }

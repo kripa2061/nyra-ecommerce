@@ -1,11 +1,14 @@
 import express from "express";
-import { register, verifyOTP, login } from "../controllers/authController.js";
+import {  wishList, getWishList, Register, sendVerifyOtp, Login, Logout, getMe } from "../controllers/authController.js";
 import authMiddleware from "../middleware/authMiddleware.js";
 import roleMiddleware from "../middleware/roleMiddleware.js";
 
 const router = express.Router();
-router.post("/register", register);
-router.post("/verify-otp", verifyOTP);
-router.post("/login", login);
-
+router.post("/register", Register);
+router.post("/verify-otp", sendVerifyOtp);
+router.post("/login", Login);
+router.get("/getme",getMe);
+router.post("/logout",Logout)
+router.post("/wishlist",authMiddleware,wishList);
+router.get("/getwishList",authMiddleware,getWishList);
 export default router;

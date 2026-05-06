@@ -1,5 +1,5 @@
 import orderModel from "../models/orderModel.js";
-import axios from "axios";
+import axios from 'axios/dist/node/axios.cjs';
 
 // Place a new order
 const placeOrder = async (req, res,next) => {

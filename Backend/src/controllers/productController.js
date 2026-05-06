@@ -1,10 +1,11 @@
 import productModel from '../models/productModel.js';
-import supabase from '../config/supabase.js';
+import { supabase } from '../config/supabase.js';
 
-const addProduct = async (req, res,next) => {
+const addProduct = async (req, res, next) => {
+     console.log("BODY:", req.body);
   try {
-
-    const { name, description, price, category, fabric, sizes, colors, stock } = req.body;
+ 
+    const { name, description, price, category, fabric, sizes, colors, stock, isNewArrival, isOffer, discountPercent } = req.body;
 
     if (!name || !price || !description || !category) {
       return res.status(400).json({ message: "Missing required fields" });
@@ -15,53 +16,38 @@ const addProduct = async (req, res,next) => {
     }
 
     const images = [];
-
     for (let file of req.files) {
-      console.log("Uploading file:", file.originalname);
-
       const fileName = `images/${Date.now()}_${file.originalname}`;
-
-      // Upload file to Supabase
-      const { data, error } = await supabase.storage
-        .from("products")
-        .upload(fileName, file.buffer, {  // note: file.buffer, not file.data
-          cacheControl: "3600",
-          upsert: false,
-          contentType: file.mimetype
-        });
-
+      const { data, error } = await supabase.storage.from("products").upload(fileName, file.buffer, {
+        cacheControl: "3600",
+        upsert: false,
+        contentType: file.mimetype
+      });
       if (error) {
-        console.error("Supabase upload error:", error);
         return res.status(500).json({ message: "Error uploading image to Supabase", error });
       }
-
       const { data: urlData } = supabase.storage.from("products").getPublicUrl(fileName);
       images.push(urlData.publicUrl);
-      console.log("Supabase public URL:", urlData.publicUrl);
     }
-
-    const sizesArray = sizes ? sizes.split(",").map(s => s.trim()) : [];
-    const colorsArray = colors ? colors.split(",").map(c => c.trim()) : [];
-    const numericPrice = Number(price);
-    const numericStock = Number(stock) || 0;
 
     const product = await productModel.create({
       name: name.trim(),
       description: description.trim(),
-      price: numericPrice,
+      price: Number(price),
       category: category.trim(),
       fabric: fabric?.trim() || "",
       review: [],
-      sizes: sizesArray,
-      colors: colorsArray,
-      stock: numericStock,
-      images
+      sizes: sizes ? sizes.split(",").map(s => s.trim()) : [],
+      colors: colors ? colors.split(",").map(c => c.trim()) : [],
+      stock: Number(stock) || 0,
+      images,
+      isNewArrival: isNewArrival === "true" || isNewArrival === true,
+      isOffer: isOffer === "true" || isOffer === true,
+      discountPercent: Number(String(discountPercent).replace("%", "")) || 0,
     });
 
     return res.status(201).json({ message: "Product Created Successfully", product });
-
   } catch (error) {
-    console.error("Add product error:", error);
     next(error);
   }
 };
@@ -117,11 +103,36 @@ const getProductsByCategory = async (req, res, next) => {
     next(err);
   }
 };
+const getNewArrival = async (req, res, next) => {
+  try {
+    const products = await productModel.find({ isNewArrival: true }).sort({ createdAt: -1 });
+    if (!products.length) return res.status(404).json({ message: "No product found" });
+    return res.status(200).json({ data: products });
+  } catch (error) {
+    next(error);
+  }
+};
+
+const getOffers = async (req, res, next) => {
+  try {
+    const products = await productModel.find({ isOffer: true, discountPercent: { $gt: 0 } });
+    if (!products.length) return res.status(404).json({ message: "No product found" });
+    const data = products.map((p) => ({
+      ...p._doc,
+      discountedPrice: Math.round(p.price - (p.price * p.discountPercent) / 100),
+    }));
+    return res.status(200).json({ data });
+  } catch (error) {
+    next(error);
+  }
+};
 
 export default {
   addProduct,
   getProducts,
   getProductByID,
   removeProduct,
- getProductsByCategory
+ getProductsByCategory,
+ getNewArrival,
+ getOffers
 };

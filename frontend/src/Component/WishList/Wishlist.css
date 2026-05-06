@@ -1,0 +1,54 @@
+/* Wishlist Page Wrapper */
+.wishlist-container {
+  padding: 20px;
+  min-height: 100vh;
+  background: #f9f9f9;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Title */
+.wishlist-title {
+  font-size: 26px;
+  font-weight: 700;
+  color: #222;
+  margin: 60px 0;
+  position: relative;
+}
+
+.wishlist-title::after {
+  content: "";
+  width: 70px;
+  height: 3px;
+  background: #ff4d6d;
+  display: block;
+  margin: 8px auto 0;
+  border-radius: 5px;
+}
+
+/* Empty message */
+.wishlist-empty {
+  font-size: 18px;
+  color: #777;
+  margin-top: 40px;
+}
+
+/* Wishlist Grid */
+.wishlist-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  width: 100%;
+  max-width: 1100px;
+  margin-top: 20px;
+}
+
+/* Card hover effect (optional if ProductCard doesn't have it) */
+.product-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+}

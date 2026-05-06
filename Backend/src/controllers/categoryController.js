@@ -1,45 +1,63 @@
 import categoryModel from "../models/categoryModel.js";
-import supabase from "../config/supabase.js";
+import {supabase} from "../config/supabase.js";
 
 // Add Category
-export const addCategory = async (req, res,next) => {
- try {
-    const { name, description } = req.body;
+// export const addCategory = async (req, res,next) => {
+//  try {
+//     const { name, description } = req.body;
 
-    if (!name || !description)
-      return res.status(400).json({ message: "Missing required fields" });
+//     if (!name || !description)
+//       return res.status(400).json({ message: "Missing required fields" });
 
-    if (!req.file)
-      return res.status(400).json({ message: "No image uploaded" });
+//     // if (!req.file)
+//     //   return res.status(400).json({ message: "No image uploaded" });
 
-    const fileName = `categories/${Date.now()}_${req.file.originalname}`;
+//     // const fileName = `categories/${Date.now()}_${req.file.originalname}`;
 
-    // Upload image to Supabase
-    const { error } = await supabase.storage
-      .from("categories")
-      .upload(fileName, req.file.buffer, {
-        cacheControl: "3600",
-        upsert: false,
-        contentType: req.file.mimetype
-      });
+//     // // Upload image to Supabase
+//     // const { error } = await supabase.storage
+//     //   .from("categories")
+//     //   .upload(fileName, req.file.buffer, {
+//     //     cacheControl: "3600",
+//     //     upsert: false,
+//     //     contentType: req.file.mimetype
+//     //   });
 
-    if (error) return res.status(500).json({ message: "Error uploading image", error });
+//     // if (error) return res.status(500).json({ message: "Error uploading image", error });
 
-    const { data: { publicUrl } } = supabase.storage.from("categories").getPublicUrl(fileName);
+//     // const { data: { publicUrl } } = supabase.storage.from("categories").getPublicUrl(fileName);
 
-    const newCategory = new categoryModel({
-      name: name.trim(),
-      description: description.trim(),
-      image: publicUrl
-    });
+//     const newCategory = new categoryModel({
+//       name: name.trim(),
+//       // description: description.trim(),
+//       // image: publicUrl
+//     });
 
+//     await newCategory.save();
+
+//     res.status(201).json({ message: "Category Added Successfully", category: newCategory });
+
+//   } catch (error) {
+//     console.error("Add category error:", error);
+//    next(error);
+//   }
+// };
+export const addCategory = async (req, res, next) => {
+  try {
+    const { name } = req.body;
+
+    if (!name) return res.status(400).json({ success: false, message: "Category name is required" });
+
+    const existing = await categoryModel.findOne({ name: name.trim() });
+    if (existing) return res.status(400).json({ success: false, message: "Category already exists" });
+
+    const newCategory = new categoryModel({ name: name.trim() });
     await newCategory.save();
 
-    res.status(201).json({ message: "Category Added Successfully", category: newCategory });
+    res.status(201).json({ success: true, message: "Category added successfully", category: newCategory });
 
   } catch (error) {
-    console.error("Add category error:", error);
-   next(error);
+    next(error);
   }
 };
 
