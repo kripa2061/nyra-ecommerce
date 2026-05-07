@@ -5,7 +5,7 @@ const addProduct = async (req, res, next) => {
      console.log("BODY:", req.body);
   try {
  
-    const { name, description, price, category, fabric, sizes, colors, stock, isNewArrival, isOffer, discountPercent } = req.body;
+    const { name, description, price, season,category, fabric, sizes, colors, stock, isNewArrival, isOffer, discountPercent } = req.body;
 
     if (!name || !price || !description || !category) {
       return res.status(400).json({ message: "Missing required fields" });
@@ -35,6 +35,7 @@ const addProduct = async (req, res, next) => {
       description: description.trim(),
       price: Number(price),
       category: category.trim(),
+      season:season.trim(),
       fabric: fabric?.trim() || "",
       review: [],
       sizes: sizes ? sizes.split(",").map(s => s.trim()) : [],

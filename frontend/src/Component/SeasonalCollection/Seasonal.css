@@ -1,0 +1,65 @@
+.seasonal-container{
+    width: 100%;
+    padding: 40px 6%;
+    background: #fffafc;
+    margin-top: 50px;
+}
+
+.seasonal-header{
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.seasonal-header h1{
+    font-size: 38px;
+    color: pink;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.seasonal-header p{
+    color: #777;
+    font-size: 16px;
+}
+
+.season-buttons{
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+}
+
+.season-buttons button{
+    border: none;
+    padding: 14px 28px;
+    border-radius: 40px;
+    background: white;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 500;
+    transition: 0.3s ease;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+}
+
+.season-buttons button:hover{
+    transform: translateY(-3px);
+}
+
+.active-season{
+    background: rgb(244, 157, 172) !important;
+    color: white;
+}
+
+.seasonal-products{
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+    gap: 28px;
+}
+
+.season-loading{
+    text-align: center;
+    font-size: 18px;
+    color: gray;
+    margin-top: 50px;
+}

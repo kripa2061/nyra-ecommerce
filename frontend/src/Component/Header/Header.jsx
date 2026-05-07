@@ -1,8 +1,9 @@
 import React from "react";
 import { assets } from "../../assets/assets";
 import "./Header.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 const Header = () => {
+  const navigate = useNavigate()
   return (
     <>
       <div className="header">
@@ -11,7 +12,7 @@ const Header = () => {
           <div className="header-content">
             <p>Made to Be Worn Beautifully</p>
             <span>Effortless elegance, designed just for you.</span>
-          <Link to={`/product`}> <button className="header-btn">Shop the Collection</button></Link>
+            <Link to={`/product`}> <button className="header-btn">Shop the Collection</button></Link>
           </div>
         </div>
       </div>
@@ -31,11 +32,11 @@ const Header = () => {
         </div>
 
         <section className="heighlight">
-         <div className="heighlight">
-           <h2>Our Highlights</h2>
-         </div>
-           
-        
+          <div className="heighlight">
+            <h2>Our Highlights</h2>
+          </div>
+
+
 
           <div className="highlights">
             <div className="highlight-card">
@@ -48,8 +49,12 @@ const Header = () => {
               <p>Style Inspiration</p>
               <p>Trendy looks & tips</p>
             </div>
-            <div className="highlight-card">
-              <img src={assets.collection} alt="Seasonal Collections" />
+            <div className="highlight-card" onClick={() => navigate("/seasonal-collection")} >
+              <img
+                src={assets.collection}
+                alt="Seasonal Collections"
+               
+              />
               <p>Seasonal Collections</p>
               <p>Curated for every season</p>
             </div>

@@ -12,6 +12,7 @@ import Cart from "./Component/Cart/Cart";
 import Checkout from "./Component/Checkout/Checkout";
 import NewArrival from "./Component/NewArrival/NewArrival";
 import Offers from "./Component/Offers/Offers";
+import Seasonal from "./Component/SeasonalCollection/Seasonal";
 
 const App = () => {
   const [wishlist, setWishlist] = useState([]);
@@ -31,6 +32,7 @@ const App = () => {
         <Route path="/login" element={<Loginpage />} />
         <Route path="/new-arrivals" element={<NewArrival />} />
         <Route path="/offers" element={< Offers/>} />
+        <Route path="/seasonal-collection" element={< Seasonal/>} />
       </Routes>
     </div>
   );

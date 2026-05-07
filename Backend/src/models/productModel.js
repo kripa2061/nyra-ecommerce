@@ -1,11 +1,12 @@
 import mongoose from "mongoose";
 const reviewSchema = new mongoose.Schema({
-    "userId": { type: String, required: true },
-    "rating": {
+   userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+  
+    rating: {
         type: Number,
         required: true
     },
-    "comment": {
+    comment: {
         type: String,
         required: true
     }
@@ -21,6 +22,10 @@ const productSchema = new mongoose.Schema({
     price: {
         type: Number,
         required: true
+    },
+    season:{
+    type:String,
+    enum:["summer","winter","spring","autumn"]
     },
     category: {
         type: String,

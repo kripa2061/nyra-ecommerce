@@ -20,8 +20,8 @@ productRouter.delete("/removeProduct/:id", removeProduct);
 productRouter.get("/newArrival",authMiddleware,getNewArrival);
 productRouter.get("/offers",authMiddleware,getOffers);
 
-productRouter.post("/addReview",authMiddleware,roleMiddleware("user"), addReview);
-productRouter.get("/getReview/:productId", getReviews);
+productRouter.post("/addReview",authMiddleware, addReview);
+productRouter.get("/getReview/:productId",authMiddleware, getReviews);
 productRouter.delete("/deleteReview/:productId/:reviewId",authMiddleware, deleteReview);
 productRouter.get("/category/:category", getProductsByCategory);
 export default productRouter;

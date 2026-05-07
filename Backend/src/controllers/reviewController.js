@@ -1,33 +1,46 @@
 import productModel from "../models/productModel.js";
-const addReview=async(req,res,next)=>{
-    try {
-        const{productId,userId,rating,comment}=req.body;
-        if(!productId||!rating||!comment){
-            return res.status(400).json({message:"missing value"})
-        }
-     const product=await productModel.findById(productId)
-     if(!product){
-       return res.status(400).json({message:"pproduct not available"}) 
-     }
-     product.review.push({userId,rating,comment});
-    await product.save();
-    return res.status(200).json({ message: "Review added successfully"})
-    } catch (error) {
-       next(error);
-    }
-}
-const getReviews = async (req, res,next) => {
+const addReview = async (req, res, next) => {
   try {
-    const { productId } = req.params;
-    const product = await productModel.findById(productId);
-    if (!product) return res.status(404).json({ message: "Product not found" });
-
-    return res.status(200).json({ reviews: product.review });
+    const { productId, rating, comment } = req.body;
+    const userId = req.user.id;
+    if (!productId || !rating || !comment) {
+      return res.status(400).json({ message: "missing value" })
+    }
+    const product = await productModel.findById(productId)
+    if (!product) {
+      return res.status(400).json({ message: "product not available" })
+    }
+    console.log(req.user);
+    product.review.push({ userId ,rating, comment });
+    await product.save();
+    return res.status(200).json({ message: "Review added successfully" })
   } catch (error) {
     next(error);
   }
 }
-const deleteReview = async (req, res,next) => {
+const getReviews = async (req, res, next) => {
+  try {
+    const { productId } = req.params;
+
+    const product = await productModel
+      .findById(productId)
+      .populate("review.userId", "name");
+
+    if (!product) {
+      return res.status(404).json({
+        message: "Product not found"
+      });
+    }
+
+    return res.status(200).json({
+      reviews: product.review
+    });
+
+  } catch (error) {
+    next(error);
+  }
+};
+const deleteReview = async (req, res, next) => {
   try {
     const { productId, reviewId } = req.params;
     const product = await productModel.findById(productId);
@@ -46,8 +59,8 @@ const deleteReview = async (req, res,next) => {
       reviews: product.review,
     });
   } catch (error) {
-      next(error);
+    next(error);
   }
 };
 
-export default {addReview,getReviews,deleteReview}
+export default { addReview, getReviews, deleteReview }
