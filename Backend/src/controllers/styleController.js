@@ -4,8 +4,7 @@ import { supabase } from '../config/supabase.js';
 const addProduct = async (req, res, next) => {
 
   try {
- 
-    const { mood, price, category,  sizes, colors,  tags} = req.body;
+     const { name, description, price, season,category, fabric, sizes, colors, stock, isNewArrival, isOffer, discountPercent } = req.body;
 
     if (!mood || !price ) {
       return res.status(400).json({ message: "Missing required fields" });
