@@ -1,50 +1,46 @@
 import mongoose from "mongoose";
-const styleSchema=new mongoose.Schema({
-    mood:{
-        type:String,
-        required:true
+const styleSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true
     },
-    category:{
-         type:String,
-        
+    mood: {
+        type: String,
+        enum: ["Date Night",
+            "Office",
+            "Traditional",
+            "Festive",
+            "Casual",
+            "Brunch",
+            "Vacation",
+            "Wedding Guest",],
+        required: true
     },
-    images:[String],
-    price:{
-        type:Number,
-        required:true
-    },
-    colors:{
-        type:String
-    },
-    sizes:{
-        type:String
-    },
-    tags:{
-        type:String
-    },
-      stock: {
-        type: Number,
-        default: 0
-    },
-     createdAt: {
-        type: Date,
-        default: Date.now
-    },   isNewArrival: {
-        type: Boolean,
-        default: false
-    },
-    isOffer: {
-        type: Boolean,
-        default: false
-    },
-      discountPercent: { type: Number, default: 0 },
-    fabric: {
+    description: {
         type: String
+    },
+    category: {
+        type: String,
+
+    },
+    stock:{
+        type:String
+    },
+    sizes: {
+        type: String
+    },
+    color: {
+        type: String
+    },
+    images: [String],
+    price: {
+        type: Number,
+        required: true
     },
     updatedAt: {
         type: Date,
         default: Date.now
     }
 })
-const styleModel=mongoose.model("Style",styleSchema)
+const styleModel = mongoose.model("Style", styleSchema)
 export default styleModel;

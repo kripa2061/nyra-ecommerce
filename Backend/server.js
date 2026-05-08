@@ -10,6 +10,8 @@ import orderRouter from "./src/routes/orderRoutes.js";
 import cartRoutes from "./src/routes/cartRoutes.js"
 import categoryRouter from "./src/routes/categoryRoutes.js";
 import errorHandler from "./src/middleware/errorMiddleware.js";
+import styleRouter from './src/routes/styleRoutes.js';
+
 
 connectDB();
 
@@ -34,6 +36,7 @@ app.use("/api/product", productRouter);
 app.use("/api/order", orderRouter);
 app.use("/api/category", categoryRouter);
 app.use("/api/cart",cartRoutes)
+app.use("/api/style",styleRouter);
 // Test route
 app.get("/", (req, res) => {
   res.send("API is running");
