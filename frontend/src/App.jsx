@@ -13,6 +13,9 @@ import Checkout from "./Component/Checkout/Checkout";
 import NewArrival from "./Component/NewArrival/NewArrival";
 import Offers from "./Component/Offers/Offers";
 import Seasonal from "./Component/SeasonalCollection/Seasonal";
+import StyleInspiration from "./Component/StyleInspiration/StyleInspiration";
+import StyleDetail from "./Component/StyleDetail/StyleDetail";
+import Footer from "./Component/Footer/Footer";
 
 const App = () => {
   const [wishlist, setWishlist] = useState([]);
@@ -33,7 +36,11 @@ const App = () => {
         <Route path="/new-arrivals" element={<NewArrival />} />
         <Route path="/offers" element={< Offers/>} />
         <Route path="/seasonal-collection" element={< Seasonal/>} />
+        <Route path="/style-inspiration" element={< StyleInspiration/>} />
+        <Route path="/style/:id" element={< StyleDetail/>} />
+      
       </Routes>
+        <Footer/>
     </div>
   );
 };

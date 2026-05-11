@@ -1,0 +1,224 @@
+/* ─── Page ─────────────────────────────────────────────── */
+.style-page {
+  padding: 90px 20px 60px;
+  background: #fff8f9;
+  min-height: 100vh;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* ─── Header ────────────────────────────────────────────── */
+.style-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.style-heading {
+  font-family: "Playfair Display", serif;
+  font-size: 36px;
+  font-style: italic;
+  background: linear-gradient(135deg, #f00c63 10%, #ff9a9e 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 8px;
+}
+
+.style-subheading {
+  color: #aaa;
+  font-size: 12px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  font-family: "Roboto", sans-serif;
+}
+
+/* ─── Mood filter row ───────────────────────────────────── */
+.style-mood-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.style-mood-btn {
+  padding: 6px 14px;
+  border-radius: 18px;
+  border: 1.5px solid #f4c0d1;
+  background: white;
+  color: #993556;
+  font-size: 11px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.style-mood-btn:hover {
+  border-color: #d87083;
+  background: #fbeaf0;
+}
+
+.style-mood-btn.active {
+  background: #993556;
+  border-color: #993556;
+  color: white;
+}
+
+/* ─── Loading / Empty ───────────────────────────────────── */
+.style-loading,
+.style-empty {
+  text-align: center;
+  padding: 70px 0;
+  color: #bbb;
+  font-family: "Roboto", sans-serif;
+}
+
+.style-empty-icon {
+  font-size: 32px;
+  margin-bottom: 8px;
+}
+
+/* ─── Grid ──────────────────────────────────────────────── */
+.style-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 18px;
+}
+
+/* ─── Card ──────────────────────────────────────────────── */
+.style-card {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 0.5px solid #f0d6de;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  cursor: pointer;
+}
+
+.style-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 14px 35px rgba(240, 12, 99, 0.12);
+}
+
+/* ─── Image ─────────────────────────────────────────────── */
+.style-card-img-wrap {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+}
+
+.style-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+  display: block;
+}
+
+.style-card:hover .style-card-img {
+  transform: scale(1.05);
+}
+
+/* ─── Mood badge ────────────────────────────────────────── */
+.style-card-mood-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: rgba(255, 255, 255, 0.95);
+  color: #993556;
+  font-size: 9px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 18px;
+  text-transform: uppercase;
+}
+
+/* ─── Save button ───────────────────────────────────────── */
+.style-card-save-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.95);
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.style-card-save-btn:hover {
+  transform: scale(1.1);
+}
+
+/* ─── Overlay text ───────────────────────────────────────── */
+.style-card-overlay-info {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  right: 12px;
+}
+
+.style-card-name {
+  color: black;
+  font-family: "Playfair Display", serif;
+  font-size: 15px;
+  margin: 0;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+  text-transform: capitalize;
+}
+
+.style-card-category {
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 0;
+}
+
+/* ─── Footer ────────────────────────────────────────────── */
+.style-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+}
+
+.style-card-price {
+  font-size: 16px;
+  font-weight: 700;
+  color: #993556;
+}
+
+.style-card-btn {
+  padding: 7px 16px;
+  border-radius: 18px;
+  background: #993556;
+  border: none;
+  color: white;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.style-card-btn:hover {
+  background: #f00c63;
+  transform: scale(1.03);
+}
+
+/* ─── Responsive ────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .style-page {
+    padding: 85px 14px 40px;
+  }
+
+  .style-heading {
+    font-size: 28px;
+  }
+
+  .style-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+}

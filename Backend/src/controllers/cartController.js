@@ -1,129 +1,172 @@
 import Cart from "../models/cartModel.js";
 import Product from "../models/productModel.js";
+import Style from "../models/styleModel.js";
 
-
-//  Add to Cart
 export const addToCart = async (req, res, next) => {
-    try {
-        const { productId, quantity } = req.body;
-        const qty = quantity || 1  // 👈 fallback fix
-        const userId = req.user.id;
+  try {
+    const { productId, styleId, quantity } = req.body;
+    const qty = quantity || 1;
+    const userId = req.user.id;
 
-        let cart = await Cart.findOne({ user: userId });
-
-        if (!cart) {
-            cart = new Cart({ user: userId, items: [] });
-        }
-
-        const productExists = await Product.findById(productId);
-        if (!productExists) {
-            return res.status(404).json({ success: false, message: "Product not found" });
-        }
-
-        const itemIndex = cart.items.findIndex(
-            item => item.product.toString() === productId
-        );
-
-        if (itemIndex > -1) {
-            cart.items[itemIndex].quantity += qty  // 👈 use qty
-        } else {
-            cart.items.push({ product: productId, quantity: qty })  // 👈 use qty
-        }
-
-        await cart.save();
-        res.status(200).json({ success: true, cart })  // 👈 match frontend expectation
-
-    } catch (error) {
-        next(error);
+    if (!productId && !styleId) {
+      return res.status(400).json({
+        success: false,
+        message: "Product or Style required",
+      });
     }
+
+    let cart = await Cart.findOne({ user: userId });
+
+    if (!cart) {
+      cart = new Cart({ user: userId, items: [] });
+    }
+
+    if (productId) {
+      const productExists = await Product.findById(productId);
+      if (!productExists) {
+        return res.status(404).json({ success: false, message: "Product not found" });
+      }
+    }
+
+    if (styleId) {
+      const styleExists = await Style.findById(styleId);
+      if (!styleExists) {
+        return res.status(404).json({ success: false, message: "Style not found" });
+      }
+    }
+
+    const itemIndex = cart.items.findIndex((item) => {
+      if (productId) return item.product?.toString() === productId;
+      if (styleId) return item.style?.toString() === styleId;
+    });
+
+    if (itemIndex > -1) {
+      cart.items[itemIndex].quantity += qty;
+    } else {
+      cart.items.push({
+        product: productId || null,
+        style: styleId || null,
+        quantity: qty,
+      });
+    }
+
+    await cart.save();
+
+    const updatedCart = await Cart.findOne({ user: userId })
+      .populate("items.product")
+      .populate("items.style");
+
+    res.status(200).json({
+      success: true,
+      cart: updatedCart.items,
+    });
+  } catch (error) {
+    next(error);
+  }
 };
 
-
-//  Get Cart
 export const getCart = async (req, res, next) => {
-    try {
-        const userId = req.user.id;
+  try {
+    const userId = req.user.id;
 
-        const cart = await Cart.findOne({ user: userId })
-            .populate("items.product");
+    const cart = await Cart.findOne({ user: userId })
+      .populate("items.product")
+      .populate("items.style");
 
-        if (!cart) {
-            return res.status(200).json({ success: true, cart: [] });
-        }
-
-        res.status(200).json({ success: true, cart: cart.items });  // 👈 send cart.items
-
-    } catch (error) {
-        next(error);
+    if (!cart) {
+      return res.status(200).json({ success: true, cart: [] });
     }
+
+    res.status(200).json({
+      success: true,
+      cart: cart.items,
+    });
+  } catch (error) {
+    next(error);
+  }
 };
 
-
-//  Remove Item
 export const removeFromCart = async (req, res, next) => {
-    try {
-        const userId = req.user.id;
-        const { productId } = req.params;
+  try {
+    const userId = req.user.id;
+    const { productId, styleId } = req.body;
 
-        const cart = await Cart.findOne({ user: userId });
+    const cart = await Cart.findOne({ user: userId });
 
-        if (!cart) {
-            return res.status(404).json({ success: false, message: "Cart not found" });
-        }
-
-        cart.items = cart.items.filter(
-            item => item.product.toString() !== productId
-        );
-
-        await cart.save();
-        res.status(200).json({ success: true, cart: cart.items });
-
-    } catch (error) {
-        next(error);
+    if (!cart) {
+      return res.status(404).json({ success: false, message: "Cart not found" });
     }
+
+    cart.items = cart.items.filter((item) => {
+      if (productId) return item.product?.toString() !== productId;
+      if (styleId) return item.style?.toString() !== styleId;
+      return true;
+    });
+
+    await cart.save();
+
+    const updated = await Cart.findOne({ user: userId })
+      .populate("items.product")
+      .populate("items.style");
+
+    res.status(200).json({
+      success: true,
+      cart: updated.items,
+    });
+  } catch (error) {
+    next(error);
+  }
 };
+
 export const updateQuantity = async (req, res, next) => {
-    try {
-        const userId = req.user.id;
-        const { productId, quantity } = req.body;
+  try {
+    const userId = req.user.id;
+    const { productId, styleId, quantity } = req.body;
 
-        const cart = await Cart.findOne({ user: userId });
+    const cart = await Cart.findOne({ user: userId });
 
-        if (!cart) {
-            return res.status(404).json({ success: false, message: "Cart not found" });
-        }
-
-        const itemIndex = cart.items.findIndex(
-            item => item.product.toString() === productId
-        );
-
-        if (itemIndex > -1) {
-            cart.items[itemIndex].quantity = quantity;
-        }
-
-        await cart.save();
-
-        const updated = await Cart.findOne({ user: userId }).populate("items.product");
-        res.status(200).json({ success: true, cart: updated.items });
-
-    } catch (error) {
-        next(error);
+    if (!cart) {
+      return res.status(404).json({ success: false, message: "Cart not found" });
     }
+
+    const itemIndex = cart.items.findIndex((item) => {
+      if (productId) return item.product?.toString() === productId;
+      if (styleId) return item.style?.toString() === styleId;
+    });
+
+    if (itemIndex > -1) {
+      cart.items[itemIndex].quantity = quantity;
+    }
+
+    await cart.save();
+
+    const updated = await Cart.findOne({ user: userId })
+      .populate("items.product")
+      .populate("items.style");
+
+    res.status(200).json({
+      success: true,
+      cart: updated.items,
+    });
+  } catch (error) {
+    next(error);
+  }
 };
 
-//  Clear Cart
-export const clearCart = async (req, res,next) => {
-    try {
-        const userId = req.user.id;
+export const clearCart = async (req, res, next) => {
+  try {
+    const userId = req.user.id;
 
-        await Cart.findOneAndUpdate(
-            { user: userId },
-            { items: [] }
-        );
+    await Cart.findOneAndUpdate(
+      { user: userId },
+      { items: [] }
+    );
 
-        res.status(200).json({ message: "Cart cleared" });
-
-    } catch (error) {
-       next(error);
-    }
+    res.status(200).json({
+      success: true,
+      message: "Cart cleared",
+    });
+  } catch (error) {
+    next(error);
+  }
 };

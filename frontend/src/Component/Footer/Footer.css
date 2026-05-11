@@ -1,0 +1,340 @@
+/* ============================================
+   NYRA Footer Styling - Pink, Women-Focused, Elegant
+   ============================================ */
+
+/* Import premium fonts */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap");
+
+/* CSS Variables for consistent pink elegant theming */
+:root {
+  --nyra-pink-primary: #f4a6d3;
+  --nyra-pink-dark: #e87bb9;
+  --nyra-pink-light: #fbd7ed;
+  --nyra-cream: #fefbf8;
+  --nyra-dark: #2d1f24;
+  --nyra-gray: #7a6b72;
+  --nyra-border: rgba(244, 166, 211, 0.25);
+}
+
+/* ============================================
+   FOOTER CONTAINER
+   ============================================ */
+
+.nyra-footer {
+  background: linear-gradient(135deg, #fefbf8 0%, #fdd9ec 100%);
+  color: var(--nyra-dark);
+  padding: 80px 40px 60px;
+  border-top: 2px solid var(--nyra-pink-primary);
+  font-family: "Poppins", sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Elegant background detail with subtle pink accents */
+.nyra-footer::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  right: -10%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(244, 166, 211, 0.1) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.nyra-footer::after {
+  content: "";
+  position: absolute;
+  bottom: -50%;
+  left: -10%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(232, 123, 185, 0.08) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.footer-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 3fr;
+  gap: 80px;
+  position: relative;
+  z-index: 1;
+  margin-bottom: 60px;
+}
+
+/* ============================================
+   FOOTER BRAND SECTION
+   ============================================ */
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding-right: 40px;
+  border-right: 2px solid var(--nyra-border);
+}
+
+.footer-brand h1 {
+  font-family: "Playfair Display", serif;
+  font-size: 48px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  margin: 0;
+  color: var(--nyra-dark);
+  text-transform: uppercase;
+  line-height: 1;
+  background: linear-gradient(135deg, var(--nyra-dark) 0%, var(--nyra-pink-dark) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.footer-brand p {
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--nyra-gray);
+  font-weight: 400;
+  letter-spacing: 0.3px;
+  margin: 0;
+  max-width: 320px;
+}
+
+/* ============================================
+   FOOTER LINKS SECTION
+   ============================================ */
+
+.footer-links {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 50px;
+}
+
+.footer-column h3 {
+  font-family: "Playfair Display", serif;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin: 0 0 24px 0;
+  color: var(--nyra-pink-dark);
+}
+
+.footer-column a {
+  display: block;
+  font-size: 14px;
+  color: var(--nyra-gray);
+  text-decoration: none;
+  margin-bottom: 14px;
+  letter-spacing: 0.2px;
+  transition: all 0.3s ease;
+  position: relative;
+  font-weight: 400;
+}
+
+.footer-column a::after {
+  content: "";
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--nyra-pink-primary), var(--nyra-pink-dark));
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.footer-column a:hover {
+  color: var(--nyra-pink-dark);
+  transform: translateX(4px);
+}
+
+.footer-column a:hover::after {
+  width: 100%;
+}
+
+/* ============================================
+   FOOTER BOTTOM
+   ============================================ */
+
+.footer-bottom {
+  position: relative;
+  z-index: 1;
+  border-top: 2px solid var(--nyra-border);
+  padding-top: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  letter-spacing: 0.2px;
+}
+
+.footer-bottom p {
+  margin: 0;
+  color: var(--nyra-gray);
+  font-weight: 400;
+}
+
+.bottom-links {
+  display: flex;
+  gap: 40px;
+}
+
+.bottom-links a {
+  text-decoration: none;
+  color: var(--nyra-gray);
+  transition: all 0.3s ease;
+  position: relative;
+  font-weight: 400;
+}
+
+.bottom-links a::before {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--nyra-pink-primary), var(--nyra-pink-dark));
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.bottom-links a:hover {
+  color: var(--nyra-pink-dark);
+}
+
+.bottom-links a:hover::before {
+  width: 100%;
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+@media (max-width: 1024px) {
+  .nyra-footer {
+    padding: 60px 30px 50px;
+  }
+
+  .footer-container {
+    grid-template-columns: 1fr;
+    gap: 60px;
+    margin-bottom: 50px;
+  }
+
+  .footer-brand {
+    border-right: none;
+    border-bottom: 1px solid var(--nyra-border);
+    padding-right: 0;
+    padding-bottom: 60px;
+  }
+
+  .footer-brand h1 {
+    font-size: 40px;
+    letter-spacing: 6px;
+  }
+
+  .footer-links {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .nyra-footer {
+    padding: 50px 20px 40px;
+  }
+
+  .footer-container {
+    gap: 40px;
+    margin-bottom: 40px;
+  }
+
+  .footer-brand h1 {
+    font-size: 32px;
+    letter-spacing: 4px;
+  }
+
+  .footer-brand p {
+    font-size: 14px;
+  }
+
+  .footer-links {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: 24px;
+    text-align: center;
+  }
+
+  .bottom-links {
+    justify-content: center;
+    gap: 30px;
+  }
+}
+
+@media (max-width: 480px) {
+  .nyra-footer {
+    padding: 40px 16px 30px;
+  }
+
+  .footer-brand h1 {
+    font-size: 28px;
+    letter-spacing: 3px;
+  }
+
+  .footer-brand p {
+    font-size: 13px;
+    line-height: 1.7;
+  }
+
+  .footer-links {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .footer-column h3 {
+    font-size: 14px;
+    letter-spacing: 1px;
+    margin-bottom: 16px;
+  }
+
+  .footer-column a {
+    font-size: 13px;
+    margin-bottom: 12px;
+  }
+
+  .footer-bottom {
+    gap: 16px;
+  }
+
+  .bottom-links {
+    gap: 20px;
+  }
+
+  .bottom-links a {
+    font-size: 12px;
+  }
+}
+
+/* ============================================
+   ACCESSIBILITY & FOCUS STATES
+   ============================================ */
+
+.footer-column a:focus,
+.bottom-links a:focus {
+  outline: 2px solid var(--nyra-pink-primary);
+  outline-offset: 2px;
+}
+
+/* Smooth scrolling support */
+@supports (scroll-behavior: smooth) {
+  html {
+    scroll-behavior: smooth;
+  }
+}

@@ -92,7 +92,7 @@ const Navbar = () => {
             ))}
           </ul>
         </li>
-
+        <li> <Link to="/style-inspiration">FIND MY STYLE </Link></li> 
         <li><Link to="/new-arrivals">NEW ARRIVALS</Link></li>
         <li><Link to="/offers">OFFERS</Link></li>
       </ul>
@@ -108,7 +108,7 @@ const Navbar = () => {
           </li>
 
           <li >
-        <Link to="/cart">    <img  src={assets.cart} alt="Cart" /></Link>
+            <Link to="/cart">    <img src={assets.cart} alt="Cart" /></Link>
           </li>
         </ul>
 
@@ -119,7 +119,7 @@ const Navbar = () => {
               src={assets.bow}
               alt="profile"
               onClick={() => setProfile(!profile)}
-              
+
             />
 
             {profile && (

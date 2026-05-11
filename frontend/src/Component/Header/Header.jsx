@@ -26,7 +26,7 @@ const Header = () => {
               and mood. Curated outfits, seasonal collections, and personalized
               suggestions all in one app.
             </p>
-            <button className="find-style-btn">Find My Style</button>
+         <Link to="/style-inspiration">  <button className="find-style-btn">Find My Style</button></Link> 
           </div>
           <img src={assets.classy} alt="Classy Style" />
         </div>
@@ -44,7 +44,7 @@ const Header = () => {
               <p>Personalized Outfits</p>
               <p>Custom styles for you</p>
             </div>
-            <div className="highlight-card">
+            <div className="highlight-card" onClick={() => navigate("/style-inspiration")}>
               <img src={assets.love2} alt="Style Inspiration" />
               <p>Style Inspiration</p>
               <p>Trendy looks & tips</p>

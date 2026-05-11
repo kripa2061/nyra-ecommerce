@@ -3,80 +3,79 @@ import { supabase } from '../config/supabase.js';
 
 export const addStyle = async (req, res, next) => {
   try {
-    const { name, mood, category, price } = req.body;
+    const { name, mood, category, price,stock,description,sizes,color} = req.body;
 
-    // Validate required fields
     if (!name || !mood || !price) {
-      return res.status(400).json({ message: "name, mood and totalPrice are required" });
+      return res.status(400).json({ success: false, message: "name, mood and price are required" });
     }
 
     if (!req.files || req.files.length === 0) {
-      return res.status(400).json({ message: "No images uploaded" });
+      return res.status(400).json({ success: false, message: "No images uploaded" });
     }
 
     const images = [];
     for (let file of req.files) {
       const fileName = `images/${Date.now()}_${file.originalname}`;
-      const { data, error } = await supabase.storage.from("style").upload(fileName, file.buffer, {
+      const { error } = await supabase.storage.from("style").upload(fileName, file.buffer, {
         cacheControl: "3600",
         upsert: false,
         contentType: file.mimetype
       });
       if (error) {
-        return res.status(500).json({ message: "Error uploading image to Supabase", error });
+        return res.status(500).json({ success: false, message: "Error uploading image", error });
       }
       const { data: urlData } = supabase.storage.from("style").getPublicUrl(fileName);
       images.push(urlData.publicUrl);
     }
 
-
-    // Save to DB — only styleModel fields
     const style = await styleModel.create({
       name: name.trim(),
       mood: mood.trim(),
       category: category?.trim(),
       price: Number(price),
-     images,
+      images,
+      stock:stock.trim(),
+      sizes:sizes.trim(),
+      color:color.trim(),
+      description:description.trim()
     });
 
-    return res.status(201).json({ message: "Style created successfully", style });
+    return res.status(201).json({ success: true, message: "Style created successfully", data: style });
 
   } catch (error) {
-    next(error);
+    next(error);   
   }
 };
-export const getStyle=async(req,res,next)=>{
+
+export const getStyle = async (req, res, next) => {
   try {
-    const style=await styleModel.find({})
-    if(!style){
-    return res.status(404).json({ success: false, message: "Style not found" });
-    }
-    return res.status(200).json({ success:true, data:{style} });
+    const style = await styleModel.find({});
+    return res.status(200).json({ success: true, data: style });  // ✅ array directly
   } catch (error) {
-    next()
+    next(error);  
   }
-}
-export const getStyleById=async(req,res,next)=>{
+};
+
+export const getStyleById = async (req, res, next) => {
   try {
-    const id=req.params.id;
-    const style=await styleModel.findById(id);
-    if(!style){
-    return res.status(404).json({ success: false, message: "Style not found" });
+    const style = await styleModel.findById(req.params.id);
+    if (!style) {
+      return res.status(404).json({ success: false, message: "Style not found" });
     }
-    return res.status(200).json({ success:true, data:{style} });
+    return res.status(200).json({ success: true, data: style });
   } catch (error) {
-    next()
+    next(error);   // ✅ always pass error
   }
-}
-export const removeStyle=async(req,res,next)=>{
+};
+
+export const removeStyle = async (req, res, next) => {
   try {
-    const id=req.params.id;
-    const style=await styleModel.findByIdAndDelete(id);
-     if(!style){
-    return res.status(404).json({ success: false, message: "Style not found" });
+    const style = await styleModel.findByIdAndDelete(req.params.id);
+    if (!style) {
+      return res.status(404).json({ success: false, message: "Style not found" });
     }
-    return res.status(200).json({ success:true, message:"Deleted" });
+    return res.status(200).json({ success: true, message: "Style deleted successfully" });
   } catch (error) {
-    next()
+    next(error);   
   }
-}
+};
