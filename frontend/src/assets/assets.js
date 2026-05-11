@@ -10,7 +10,7 @@ import hanger from './hanger.png'
 import bow from './Singup.png'
 import classy from './Classy.jpg'
 import love2 from './romantic.png'
-
+import search from "./search.png"
 export const assets={
     face,
     cart,
@@ -23,5 +23,6 @@ export const assets={
     hanger,
     classy,
     love2,
-    bow
+    bow,
+    search
 }

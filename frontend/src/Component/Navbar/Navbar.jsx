@@ -102,6 +102,13 @@ const Navbar = () => {
 
         <ul className="navbar-icons">
           <li>
+<Link to="/search">
+            <img src={assets.search} alt="search"/>
+            </Link>
+          </li>
+          
+          <li>
+            
             <Link to="/wishlist">
               <img src={assets.wishlist} alt="Wishlist" />
             </Link>

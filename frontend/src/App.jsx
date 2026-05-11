@@ -16,6 +16,7 @@ import Seasonal from "./Component/SeasonalCollection/Seasonal";
 import StyleInspiration from "./Component/StyleInspiration/StyleInspiration";
 import StyleDetail from "./Component/StyleDetail/StyleDetail";
 import Footer from "./Component/Footer/Footer";
+import Search from "./Component/Search/Search";
 
 const App = () => {
   const [wishlist, setWishlist] = useState([]);
@@ -28,7 +29,7 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/products/:category" element={<ProductList wishlist={wishlist} setWishlist={setWishlist} />} />
         <Route path="/product" element={<ProductList wishlist={wishlist} setWishlist={setWishlist} />} />
-        <Route path="/wishlist" element={<Wishlist wishlist={wishlist} setWishlist={setWishlist} />} />
+        <Route path="/wishlist" element={<Wishlist wishlist={wishlist} setWishlist={setWishlist}  />} />
         <Route path="/product/:id" element={<ProductDetail />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/checkout" element={<Checkout />} />
@@ -38,6 +39,7 @@ const App = () => {
         <Route path="/seasonal-collection" element={< Seasonal/>} />
         <Route path="/style-inspiration" element={< StyleInspiration/>} />
         <Route path="/style/:id" element={< StyleDetail/>} />
+        <Route path="/search" element={< Search wishlist={wishlist} setWishlist={setWishlist}/>} />
       
       </Routes>
         <Footer/>

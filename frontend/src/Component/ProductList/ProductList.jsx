@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import ProductCard from "../ProductCard/ProductCard";
 import "./ProductList.css";
+import StyleInspiration from "../StyleInspiration/StyleInspiration";
 
 const ProductList = () => {
   const { category } = useParams();
@@ -80,6 +81,7 @@ const fetchProducts = async () => {
           />
         ))}
       </div>
+      <StyleInspiration/>
     </div>
   );
 };
