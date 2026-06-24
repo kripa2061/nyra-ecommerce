@@ -214,6 +214,27 @@ export const getMe = async (req, res, next) => {
     return res.json({ loggedIn: false });
   }
 };
+export const getUser = async (req, res, next) => {
+  try {
+    const users = await User.find({});
+
+    if (!users || users.length === 0) {
+      return res.status(404).json({
+        success: false,
+        message: "No users found",
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: "Users fetched successfully",
+      data: users,
+    });
+
+  } catch (error) {
+    next(error);
+  }
+};
 export const wishList = async (req, res, next) => {
   try {
     const user = await User.findById(req.userId);

@@ -5,7 +5,7 @@ import "./StyleInspiration.css";
 import { useNavigate } from "react-router-dom";
 
 const StyleInspiration = () => {
-  const url = "http://localhost:8000";
+  const url = "https://womendressing-backend.onrender.com";
   const [styles, setStyles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [activeMood, setActiveMood] = useState("All");

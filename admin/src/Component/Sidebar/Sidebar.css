@@ -1,0 +1,367 @@
+/* ============================================
+   NYRA Sidebar CSS - FIXED VERSION
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap');
+
+/* ============================================
+   CSS Variables
+   ============================================ */
+
+:root {
+  --primary-pink: #f4a6d3;
+  --dark-pink: #e87bb9;
+  --light-pink: #fbd7ed;
+  --cream: #faf8f3;
+  --beige: #e8dcc8;
+  --dark-beige: #d4c4b0;
+  --text-dark: #3d3228;
+  --text-light: rgba(61, 50, 40, 0.7);
+  --text-lighter: rgba(61, 50, 40, 0.5);
+  --border: rgba(212, 196, 176, 0.3);
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ============================================
+   SIDEBAR CONTAINER
+   ============================================ */
+
+.sidebar {
+  width: 280px;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(250, 248, 243, 0.95) 0%, rgba(232, 220, 200, 0.95) 100%);
+  backdrop-filter: blur(15px);
+  border-right: 1px solid var(--border);
+  padding: 32px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  position: static;
+  left: auto;
+  top: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
+  box-shadow: none;
+  font-family: 'Poppins', sans-serif;
+  flex-shrink: 0;
+   text-decoration: none;
+}
+
+/* ============================================
+   SIDEBAR LINKS SECTION
+   ============================================ */
+
+.sidebar-links {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+  text-decoration: none;
+}
+
+/* ============================================
+   SIDEBAR ITEM
+   ============================================ */
+.sidebar a{
+  text-decoration: none;
+}
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: var(--transition);
+  color: var(--text-light);
+  font-size: 14px;
+  font-weight: 500;
+  border: 1px solid transparent;
+  position: relative;
+  overflow: hidden;
+  user-select: none;
+   text-decoration: none;
+}
+
+/* Hover State */
+.sidebar-item:hover {
+  color: var(--dark-pink);
+  background: rgba(244, 166, 211, 0.1);
+  border-color: rgba(244, 166, 211, 0.25);
+  transform: translateX(4px);
+
+}
+
+/* Active State */
+.sidebar-item.active {
+  background: linear-gradient(135deg, rgba(244, 166, 211, 0.25) 0%, rgba(251, 215, 237, 0.2) 100%);
+  border: 1px solid rgba(244, 166, 211, 0.35);
+  color: var(--dark-pink);
+  box-shadow: inset 0 0 20px rgba(244, 166, 211, 0.2);
+  position: relative;
+}
+
+/* Active glow effect */
+.sidebar-item.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 24px;
+  background: linear-gradient(180deg, transparent, var(--primary-pink), transparent);
+  border-radius: 4px;
+}
+
+.sidebar-item.active::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(244, 166, 211, 0.1) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* Icon Styling */
+.sidebar-item svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  transition: var(--transition);
+  stroke-width: 2;
+}
+
+.sidebar-item.active svg {
+  color: var(--primary-pink);
+  filter: drop-shadow(0 0 8px rgba(244, 166, 211, 0.4));
+}
+
+.sidebar-item:hover svg {
+  color: var(--primary-pink);
+}
+
+/* Text Label */
+.sidebar-item span {
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.sidebar-item.active span {
+  color: var(--primary-pink);
+  font-weight: 600;
+}
+
+/* ============================================
+   SIDEBAR FOOTER (Optional)
+   ============================================ */
+
+.sidebar-footer {
+  border-top: 1px solid var(--border);
+  padding-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: auto;
+}
+
+.sidebar-user {
+  background: rgba(244, 166, 211, 0.1);
+  border: 1px solid rgba(244, 166, 211, 0.25);
+  border-radius: 10px;
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.sidebar-user:hover {
+  background: rgba(244, 166, 211, 0.2);
+  border-color: rgba(244, 166, 211, 0.4);
+}
+
+.sidebar-user-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, var(--primary-pink), var(--dark-pink));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.sidebar-user-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.sidebar-user-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--dark-pink);
+  margin: 0;
+}
+
+.sidebar-user-email {
+  font-size: 11px;
+  color: var(--text-light);
+  margin: 2px 0 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ============================================
+   SCROLLBAR STYLING
+   ============================================ */
+
+.sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background: rgba(232, 123, 185, 0.3);
+  border-radius: 3px;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+  background: rgba(232, 123, 185, 0.5);
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .sidebar {
+    width: 240px;
+    padding: 24px 12px;
+    gap: 24px;
+  }
+
+  .sidebar-item {
+    padding: 12px 12px;
+    font-size: 13px;
+  }
+
+  .sidebar-item svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+/* Mobile - Collapsible */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    max-height: 300px;
+    padding: 24px 14px;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .sidebar-item {
+    padding: 12px 12px;
+    font-size: 13px;
+  }
+
+  .sidebar-links {
+    gap: 6px;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+  .sidebar {
+    width: 100%;
+    padding: 20px 12px;
+    gap: 20px;
+  }
+
+  .sidebar-item {
+    padding: 12px;
+    font-size: 13px;
+  }
+
+  .sidebar-user-name {
+    font-size: 12px;
+  }
+
+  .sidebar-user-email {
+    font-size: 10px;
+  }
+}
+
+/* ============================================
+   ANIMATION KEYFRAMES
+   ============================================ */
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.sidebar-item {
+  animation: slideIn 0.3s ease forwards;
+}
+
+.sidebar-item:nth-child(1) { animation-delay: 0.05s; }
+.sidebar-item:nth-child(2) { animation-delay: 0.1s; }
+.sidebar-item:nth-child(3) { animation-delay: 0.15s; }
+.sidebar-item:nth-child(4) { animation-delay: 0.2s; }
+
+/* ============================================
+   ACTIVE STATE ANIMATION
+   ============================================ */
+
+.sidebar-item.active {
+  animation: activeGlow 2s ease-in-out infinite;
+}
+
+@keyframes activeGlow {
+  0%, 100% {
+    box-shadow: inset 0 0 20px rgba(244, 166, 211, 0.15), 0 0 15px rgba(244, 166, 211, 0.1);
+  }
+  50% {
+    box-shadow: inset 0 0 25px rgba(244, 166, 211, 0.25), 0 0 20px rgba(244, 166, 211, 0.15);
+  }
+}
+
+/* ============================================
+   FOCUS STATE FOR ACCESSIBILITY
+   ============================================ */
+
+.sidebar-item:focus,
+.sidebar-user:focus {
+  outline: 2px solid var(--primary-pink);
+  outline-offset: 2px;
+}
+
+/* Reduce motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .sidebar-item,
+  .sidebar-item.active,
+  .sidebar-user {
+    animation: none !important;
+    transition: none !important;
+  }
+}

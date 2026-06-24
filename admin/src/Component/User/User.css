@@ -1,0 +1,63 @@
+/* Page wrapper */
+.user-page {
+  padding: 30px;
+  background: #f6f7fb;
+  min-height: 100vh;
+  font-family: "Inter", sans-serif;
+}
+
+/* Heading */
+.user-page h2 {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #222;
+}
+
+/* Loading / error text */
+.user-page h3 {
+  text-align: center;
+  margin-top: 50px;
+  color: #555;
+}
+
+/* Empty state */
+.empty-text {
+  text-align: center;
+  color: #888;
+  margin-top: 30px;
+  font-size: 16px;
+}
+
+/* User grid */
+.user-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+/* User card */
+.user-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 18px 20px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+  transition: all 0.25s ease;
+  border: 1px solid #eee;
+}
+
+.user-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Text styling */
+.user-card p {
+  margin: 8px 0;
+  color: #444;
+  font-size: 14px;
+}
+
+.user-card b {
+  color: #111;
+}

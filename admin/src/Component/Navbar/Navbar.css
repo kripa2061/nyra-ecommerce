@@ -1,0 +1,201 @@
+
+
+:root {
+  --primary-pink: #f4a6d3;
+  --dark-pink: #e87bb9;
+  --cream: #faf8f3;
+  --beige: #e8dcc8;
+  --text-dark: #3d3228;
+  --text-light: rgba(61, 50, 40, 0.7);
+  --border: rgba(212, 196, 176, 0.3);
+  --shadow: 0 4px 16px rgba(244, 166, 211, 0.1);
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+
+
+.navbar {
+  width: 100%;
+  background: linear-gradient(135deg, rgba(254, 252, 247, 0.98) 0%, rgba(250, 248, 243, 0.98) 100%);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 32px;
+  position: relative;
+  z-index: 50;
+  font-family: 'Poppins', sans-serif;
+  transition: var(--transition);
+  flex-shrink: 0;
+  position:fixed;
+}
+
+
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.navbar-left:hover {
+  transform: translateX(-2px);
+}
+
+.navbar-left p {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0;
+  background: linear-gradient(135deg, var(--dark-pink) 0%, var(--primary-pink) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: 2px;
+  font-family: 'Playfair Display', serif;
+  transition: var(--transition);
+}
+
+.navbar-left:hover p {
+  filter: brightness(1.1);
+}
+
+
+.navbar-logo {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+  border-radius: 8px;
+  padding: 4px;
+  background: linear-gradient(135deg, var(--primary-pink) 0%, rgba(244, 166, 211, 0.1) 100%);
+  border: 1.5px solid rgba(244, 166, 211, 0.25);
+  box-shadow: 0 2px 8px rgba(244, 166, 211, 0.15);
+  transition: var(--transition);
+}
+
+.navbar-logo:hover {
+  transform: scale(1.05) rotate(2deg);
+  box-shadow: 0 4px 12px rgba(244, 166, 211, 0.25);
+  border-color: rgba(244, 166, 211, 0.4);
+}
+
+/* ============================================
+   ADMIN TEXT BADGE
+   ============================================ */
+
+.admin-text {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-light);
+  margin: 0;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 8px 16px;
+  border-radius: 6px;
+  background: rgba(244, 166, 211, 0.08);
+  border: 1px solid rgba(244, 166, 211, 0.15);
+  transition: var(--transition);
+}
+
+.admin-text:hover {
+  color: var(--dark-pink);
+  background: rgba(244, 166, 211, 0.12);
+  border-color: rgba(244, 166, 211, 0.25);
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+@media (max-width: 1024px) {
+  .navbar {
+    padding: 14px 24px;
+  }
+
+  .navbar-left p {
+    font-size: 20px;
+  }
+
+  .navbar-logo {
+    width: 32px;
+    height: 32px;
+  }
+
+  .admin-text {
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 12px 16px;
+    justify-content: center;
+    gap: 16px;
+  }
+
+  .navbar-left {
+    gap: 10px;
+  }
+
+  .navbar-left p {
+    font-size: 18px;
+  }
+
+  .navbar-logo {
+    width: 30px;
+    height: 30px;
+  }
+
+  .admin-text {
+    font-size: 11px;
+    padding: 4px 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    padding: 10px 12px;
+    flex-direction: column;
+  }
+
+  .navbar-left p {
+    font-size: 16px;
+    letter-spacing: 1px;
+  }
+
+  .navbar-logo {
+    width: 28px;
+    height: 28px;
+  }
+
+  .admin-text {
+    font-size: 10px;
+    padding: 3px 8px;
+  }
+}
+.logout-dropdown {
+  position: absolute;
+  top: 60px;
+  right: 20px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  padding: 8px 0;
+  width: 120px;
+  z-index: 100;
+}
+
+.logout-dropdown li {
+  list-style: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.logout-dropdown li:hover {
+  background: #f2f2f2;
+}

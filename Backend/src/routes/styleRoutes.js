@@ -10,8 +10,8 @@ const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
 styleRouter.post("/addStyle",  upload.array("images"),addStyle );
-styleRouter.get("/getStyle",authMiddleware,  getStyle);
-styleRouter.get("/getstyleById/:id",authMiddleware,  getStyleById);
+styleRouter.get("/getStyle", getStyle);
+styleRouter.get("/getstyleById/:id", getStyleById);
 
 styleRouter.delete("/deleteStyle", removeStyle); 
 

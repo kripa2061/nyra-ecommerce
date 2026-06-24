@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 const Loginpage = () => {
   const [currentState, setCurrentState] = useState("signup");
 const navigate = useNavigate();
-  const url = "http://localhost:8000";
+  const url = "https://womendressing-backend.onrender.com";
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");

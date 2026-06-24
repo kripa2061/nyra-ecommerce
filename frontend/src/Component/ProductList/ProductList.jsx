@@ -8,7 +8,7 @@ import StyleInspiration from "../StyleInspiration/StyleInspiration";
 
 const ProductList = () => {
   const { category } = useParams();
-  const url = "http://localhost:8000";
+  const url = "https://womendressing-backend.onrender.com";
 
   const [products, setProducts] = useState([]);
   const [wishlist, setWishlist] = useState([]);
@@ -16,13 +16,13 @@ const ProductList = () => {
 const fetchProducts = async () => {
   try {
     let endpoint = `${url}/api/product/getProduct`;
-    const config = { withCredentials: true };
+  
 
     if (category) {
       endpoint = `${url}/api/product/category/${category}`;
     }
 
-    const res = await axios.get(endpoint, config);
+    const res = await axios.get(endpoint);
     setProducts(res.data.data || []);
   } catch (error) {
     toast.error("Failed to fetch products");

@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
   const [cart, setCart] = useState([]);
-  const url = "http://localhost:8000";
+  const url = "https://womendressing-backend.onrender.com";
   const navigate = useNavigate();
 
   const getCart = async () => {

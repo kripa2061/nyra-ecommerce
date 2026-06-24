@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import './Wishlist.css'
 const Wishlist = () => {
-  const url = "http://localhost:8000";
+  const url = "https://womendressing-backend.onrender.com";
   const [wishlist, setWishlist] = useState([]);
 
   const getWishList = async () => {

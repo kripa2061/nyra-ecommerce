@@ -7,7 +7,7 @@ const Search = () => {
   const [search, setSearch] = useState("");
   const [products, setProducts] = useState([]);
 
-  const url = "http://localhost:8000";
+  const url = "https://womendressing-backend.onrender.com";
 
   // FETCH PRODUCTS
   const fetchProducts = async () => {

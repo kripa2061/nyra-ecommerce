@@ -4,7 +4,7 @@
 // import { useNavigate } from 'react-router-dom';
 
 // const Checkout = () => {
-//   const url = "http://localhost:8000";
+//   const url = "https://womendressing-backend.onrender.com";
 //   const navigate = useNavigate();
 
 //   const [order, setOrder] = useState(null);       // stores the order object

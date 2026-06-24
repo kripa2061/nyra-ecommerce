@@ -1,0 +1,59 @@
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding: 20px;
+  background: #faf8f3;
+  min-height: 100vh;
+  font-family: "Poppins", sans-serif;
+  margin-top: 50px;
+}
+
+/* TOP CARDS GRID */
+.dashboard-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+/* CARD STYLE */
+.dashboard-card {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  transition: 0.3s ease;
+  height: 120px;
+}
+
+.dashboard-card:hover {
+  transform: translateY(-5px);
+}
+
+/* ICON + TITLE */
+.icon-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.icon-title p {
+  margin: 0;
+  font-size: 14px;
+  color: #777;
+}
+
+/* NUMBER */
+.dashboard-card h2 {
+  margin-top: 12px;
+  font-size: 26px;
+  color: #e87bb9;
+}
+
+/* PRODUCT SECTION FIX */
+.product-display {
+  width: 90%;
+}
+
+/* IMPORTANT: ensure grid works inside ProductDisplay */

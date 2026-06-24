@@ -13,8 +13,8 @@ const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
 productRouter.post("/addProduct",  upload.array("images"), addProduct);
-productRouter.get("/getProduct",authMiddleware, getProducts);
-productRouter.get("/getProductbyid/:id",authMiddleware, getProductByID);
+productRouter.get("/getProduct", getProducts);
+productRouter.get("/getProductbyid/:id",getProductByID);
 productRouter.delete("/removeProduct/:id", removeProduct);
 
 productRouter.get("/newArrival",authMiddleware,getNewArrival);

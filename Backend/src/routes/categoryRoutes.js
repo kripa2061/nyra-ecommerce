@@ -10,7 +10,7 @@ const upload = multer({ storage });
 // Routes
 router.post("/addCategory", authMiddleware,   addCategory);
 router.put("/updateCategory/:id", authMiddleware, roleMiddleware("admin"), upload.single("image"), updateCategory);
-router.get("/getCategory",authMiddleware, getCategory);
+router.get("/getCategory", getCategory);
 router.delete("/deleteCategory/:id", deleteCategory);
 
 export default router;

@@ -1,0 +1,190 @@
+/* ============================================
+   ADMIN LAYOUT - NAVBAR TOP, SIDEBAR LEFT
+   ============================================ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  width: 100%;
+  height: 100%;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* ============================================
+   ADMIN WRAPPER - FLEX COLUMN
+   ============================================ */
+
+.admin-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
+  background: #ffffff;
+}
+
+/* ============================================
+   NAVBAR - TOP
+   ============================================ */
+
+.navbar {
+  width: 100%;
+  order: 1;
+  flex-shrink: 0;
+  border-bottom: 1px solid rgba(212, 196, 176, 0.3);
+  margin-left: 0 !important;
+  padding: 16px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* ============================================
+   ADMIN BODY - FLEX ROW
+   ============================================ */
+
+.admin-body {
+  display: flex;
+  flex: 1;
+  width: 100%;
+  overflow: hidden;
+  margin-top: 10px;
+}
+
+/* ============================================
+   SIDEBAR - LEFT SIDE
+   ============================================ */
+
+.sidebar {
+  width: 280px;
+  flex-shrink: 0;
+  position: static !important;
+margin-top: 50px !important;
+
+  height: 100% !important;
+  border-right: 1px solid rgba(212, 196, 176, 0.3);
+  border-left: none !important;
+  overflow-y: auto;
+  overflow-x: hidden;
+  z-index: 10;
+  padding: 32px 16px;
+  background: linear-gradient(135deg, rgba(250, 248, 243, 0.95) 0%, rgba(232, 220, 200, 0.95) 100%);
+  box-shadow: none;
+}
+
+/* ============================================
+   SIDEBAR LINKS CONTAINER
+   ============================================ */
+
+.sidebar-links {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* ============================================
+   CONTENT AREA - RIGHT SIDE
+   ============================================ */
+
+.admin-content {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 32px;
+  background: #ffffff;
+}
+
+/* ============================================
+   SCROLLBAR STYLING
+   ============================================ */
+
+.sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background: rgba(232, 123, 185, 0.3);
+  border-radius: 3px;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+  background: rgba(232, 123, 185, 0.5);
+}
+
+.admin-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.admin-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.admin-content::-webkit-scrollbar-thumb {
+  background: rgba(232, 123, 185, 0.3);
+  border-radius: 3px;
+}
+
+.admin-content::-webkit-scrollbar-thumb:hover {
+  background: rgba(232, 123, 185, 0.5);
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+@media (max-width: 1024px) {
+  .sidebar {
+    width: 240px;
+  }
+
+  .navbar {
+    padding: 14px 24px;
+  }
+
+  .admin-content {
+    padding: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .admin-body {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    height: auto;
+    max-height: 300px;
+    border-right: none;
+    border-bottom: 1px solid rgba(212, 196, 176, 0.3);
+  }
+
+  .navbar {
+    padding: 12px 16px;
+  }
+
+  .admin-content {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    padding: 10px 12px;
+  }
+
+  .admin-content {
+    padding: 16px;
+  }
+
+  .sidebar {
+    padding: 20px 12px;
+  }
+}

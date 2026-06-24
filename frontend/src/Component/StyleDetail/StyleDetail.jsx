@@ -7,7 +7,7 @@ import "./StyleDetail.css";
 const StyleDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const url = "http://localhost:8000";
+  const url = "https://womendressing-backend.onrender.com";
 
   const [style, setStyle] = useState(null);
   const [selectedImage, setSelectedImage] = useState(0);

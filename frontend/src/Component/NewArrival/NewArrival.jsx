@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import './NewArrival.css';
 
 const NewArrival = () => {
-  const url = "http://localhost:8000";
+  const url = "https://womendressing-backend.onrender.com";
   const navigate = useNavigate();
   const [newArrival, setNewArrival] = useState([]);
   const [loading, setLoading] = useState(true);

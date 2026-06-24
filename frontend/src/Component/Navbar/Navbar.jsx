@@ -6,7 +6,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 const Navbar = () => {
-  const url = "http://localhost:8000";
+  const url = "https://womendressing-backend.onrender.com";
 
   const [categories, setCategories] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);

@@ -9,7 +9,7 @@ const Seasonal = () => {
     const [product, setProduct] = useState([])
     const [selectedseason, setSelectedSeason] = useState("summer")
 
-    const url = "http://localhost:8000";
+    const url = "https://womendressing-backend.onrender.com";
 
     const fetchProduct = async () => {
         try {

@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import './Offers.css';
 
 const Offers = () => {
-  const url = "http://localhost:8000";
+  const url = "https://womendressing-backend.onrender.com";
   const navigate = useNavigate();
   const [newOffer, setOffer] = useState([]);
   const [loading, setLoading] = useState(true);

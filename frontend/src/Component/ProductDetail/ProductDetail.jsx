@@ -213,7 +213,7 @@ import "./ProductDetail.css";
 
 const ProductDetail = () => {
   const { id } = useParams();
-  const url = "http://localhost:8000";
+  const url = "https://womendressing-backend.onrender.com";
 
   const [product, setProduct] = useState(null);
   const [selectedImage, setSelectedImage] = useState(0);
@@ -229,8 +229,7 @@ const ProductDetail = () => {
   const fetchProductDetail = async () => {
     try {
       const response = await axios.get(
-        `${url}/api/product/getProductbyid/${id}`,
-        { withCredentials: true }
+        `${url}/api/product/getProductbyid/${id}`
       );
       if (response.data) {
         setProduct(response.data.data);
