@@ -26,7 +26,7 @@ const app = express();
 // Allowed frontend origins
 const allowedOrigins = [
   "https://womendressing.onrender.com",
-  "http://localhost:5174",
+  "https://womendressing-admin.onrender.com",
 ];
 
 // CORS setup
