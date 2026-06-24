@@ -17,8 +17,8 @@ productRouter.get("/getProduct", getProducts);
 productRouter.get("/getProductbyid/:id",getProductByID);
 productRouter.delete("/removeProduct/:id", removeProduct);
 
-productRouter.get("/newArrival",authMiddleware,getNewArrival);
-productRouter.get("/offers",authMiddleware,getOffers);
+productRouter.get("/newArrival",getNewArrival);
+productRouter.get("/offers",getOffers);
 
 productRouter.post("/addReview",authMiddleware, addReview);
 productRouter.get("/getReview/:productId",authMiddleware, getReviews);

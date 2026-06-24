@@ -6,7 +6,7 @@ import "./ProductDetail.css";
 
 const ProductDetail = () => {
   const { id } = useParams();
-  const url = "http://localhost:8000";
+  const url = "https://womendressing-backend.onrender.com";
 
   const [product, setProduct] = useState(null);
   const [selectedImage, setSelectedImage] = useState(0);

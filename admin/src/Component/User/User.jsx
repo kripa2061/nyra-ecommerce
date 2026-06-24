@@ -8,7 +8,7 @@ const User = () => {
 
   const fetchUsers = async () => {
     try {
-      const res = await axios.get("http://localhost:8000/api/auth/getUser");
+      const res = await axios.get("https://womendressing-backend.onrender.com/api/auth/getUser");
 
       // backend: { success: true, data: [...] }
       setUsers(res.data.data || []);

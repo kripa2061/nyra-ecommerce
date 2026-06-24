@@ -48,7 +48,7 @@ const Mood = () => {
       }
 
       const res = await axios.post(
-        "http://localhost:8000/api/style/addStyle",
+        "https://womendressing-backend.onrender.com/api/style/addStyle",
         formData,
         {
           headers: {

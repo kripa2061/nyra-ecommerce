@@ -15,7 +15,7 @@ const Dashboard = () => {
   const fetchDashboard = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:8000/api/admin/getDashboard"
+        "https://womendressing-backend.onrender.com/api/admin/getDashboard"
       );
       setData(response.data);
     } catch (error) {

@@ -11,7 +11,7 @@ const navigate=useNavigate()
   const fetchProducts = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:8000/api/product/getProduct"
+        "https://womendressing-backend.onrender.com/api/product/getProduct"
       );
       setProducts(res.data.data || []);
     } catch (err) {
