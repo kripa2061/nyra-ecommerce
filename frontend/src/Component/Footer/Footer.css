@@ -23,7 +23,7 @@
 .nyra-footer {
   background: linear-gradient(135deg, #fefbf8 0%, #fdd9ec 100%);
   color: var(--nyra-dark);
-  padding: 80px 40px 60px;
+  padding: 40px  20px !important;
   border-top: 2px solid var(--nyra-pink-primary);
   font-family: "Poppins", sans-serif;
   position: relative;
@@ -110,7 +110,7 @@
 .footer-links {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 50px;
+  gap: 10px !important;
 }
 
 .footer-column h3 {
@@ -121,6 +121,8 @@
   text-transform: uppercase;
   margin: 0 0 24px 0;
   color: var(--nyra-pink-dark);
+  display: flex;
+  gap: 30px;
 }
 
 .footer-column a {
@@ -280,7 +282,7 @@
 
 @media (max-width: 480px) {
   .nyra-footer {
-    padding: 40px 16px 30px;
+    padding: 20px 26px 30px;
   }
 
   .footer-brand h1 {
@@ -294,7 +296,7 @@
   }
 
   .footer-links {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(3, 1fr) !important;
     gap: 40px;
   }
 
@@ -302,6 +304,7 @@
     font-size: 14px;
     letter-spacing: 1px;
     margin-bottom: 16px;
+     
   }
 
   .footer-column a {

@@ -54,8 +54,7 @@ console.log(response.headers);
       toast.error(response.data.message);
     }
   } catch (error) {
-    console.log("ERROR:", error);
-    console.log("RESPONSE:", error.response);
+ 
     toast.error(error.message);
   }
 };
