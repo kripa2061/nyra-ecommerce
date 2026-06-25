@@ -65,9 +65,6 @@ export const addCategory = async (req, res, next) => {
 export const getCategory = async (req, res,next) => {
   try {
     const categories = await categoryModel.find({});
-    if (categories.length === 0)
-      return res.status(404).json({ message: "Category not found" });
-
     res.status(200).json({ data: categories });
   } catch (error) {
        next(error);

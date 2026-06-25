@@ -12,32 +12,54 @@ const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const Register = async () => {
-    try {
-      const endpoint =
-        currentState === "signup"
-          ? "/api/auth/register"
-          : "/api/auth/login";
+const Register = async () => {
+  try {
+    const endpoint =
+      currentState === "signup"
+        ? "/api/auth/register"
+        : "/api/auth/login";
 
-      const payload =
-        currentState === "signup"
-          ? { name, email, password }
-          : { email, password };
+    const payload =
+      currentState === "signup"
+        ? { name, email, password }
+        : { email, password };
 
-      const response = await axios.post(url + endpoint, payload, {
+    const response = await axios.post(
+      url + endpoint,
+      payload,
+      {
         withCredentials: true,
-      });
-
-      if (response.data.success) {
-        navigate("/")
-       
-      } else {
-        toast.error(response.data.message);
       }
-    } catch (error) {
-      toast.error(error.message);
+    );
+
+console.log("DATA");
+console.log(response.data);
+
+console.log("HEADERS");
+console.log(response.headers);
+    console.log("HEADERS:", response.headers);
+
+    if (response.data.success) {
+      const me = await axios.get(
+        "https://womendressing-backend.onrender.com/api/auth/getme",
+        {
+          withCredentials: true,
+        }
+      );
+
+      console.log("GETME:", me.data);
+
+      navigate("/");
+    } else {
+      toast.error(response.data.message);
     }
-  };
+  } catch (error) {
+    console.log("ERROR:", error);
+    console.log("RESPONSE:", error.response);
+    toast.error(error.message);
+  }
+};
+
 
   const handleSubmit = (e) => {
     e.preventDefault();

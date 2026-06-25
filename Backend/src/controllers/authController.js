@@ -6,6 +6,13 @@ import nodemailer from "nodemailer";
 
 
 
+const cookieOptions = {
+  httpOnly: true,
+  secure: true,
+  sameSite: "none",
+  maxAge: 7 * 24 * 60 * 60 * 1000,
+};
+
 const transporter = nodemailer.createTransport({
   host: process.env.SMTP_HOST,
   port: Number(process.env.SMTP_PORT),
@@ -39,12 +46,7 @@ export const Register = async (req, res) => {
       { expiresIn: "7d" }
     );
 
-   res.cookie("token", token, {
-  httpOnly: true,
-  secure: false,         // false for localhost
-  sameSite: "lax",      // must be lax or none — not strict for cross-port requests
-  maxAge: 7 * 24 * 60 * 60 * 1000,
-});
+    res.cookie("token", token, cookieOptions);
 
     try {
       await transporter.sendMail({
@@ -64,48 +66,57 @@ export const Register = async (req, res) => {
 export const Login = async (req, res) => {
   const { email, password } = req.body;
 
-  if (!email || !password) {
-    return res.json({ success: false, message: "Missing details" });
-  }
-
   try {
     const user = await User.findOne({ email });
 
     if (!user) {
-      return res.json({ success: false, message: "User not found" });
+      return res.json({
+        success: false,
+        message: "User not found",
+      });
     }
 
-    const isMatch = await bcrypt.compare(password, user.password);
-
-    if (!isMatch) {
-      return res.json({ success: false, message: "Password doesn't match" });
-    }
-
-    const token = jwt.sign(
-      { id: user._id },
-      process.env.JWT_SECRET,
-      { expiresIn: "7d" }
+    const isMatch = await bcrypt.compare(
+      password,
+      user.password
     );
 
-    res.cookie("token", token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
-      maxAge: 7 * 24 * 60 * 60 * 1000
-    });
+    if (!isMatch) {
+      return res.json({
+        success: false,
+        message: "Password doesn't match",
+      });
+    }
 
-    return res.json({
-      success: true,
-      message: "Login successful",
-      user: {
-        _id: user._id,
-        name: user.name,
-        email: user.email
-      },
-      token
-    });
+ const token = jwt.sign(
+  { id: user._id },
+  process.env.JWT_SECRET,
+  { expiresIn: "7d" }
+);
+
+console.log("TOKEN CREATED:", token);
+
+res.cookie("token", token, {
+  httpOnly: true,
+  secure: true,
+  sameSite: "none",
+  path: "/",
+  maxAge: 7 * 24 * 60 * 60 * 1000,
+});
+
+console.log("COOKIE ADDED");
+console.log("HEADERS:", res.getHeaders());
+
+return res.json({
+  success: true,
+  message: "Login successful",
+  token,
+});
   } catch (err) {
-    return res.json({ success: false, message: err.message });
+    return res.json({
+      success: false,
+      message: err.message,
+    });
   }
 };
 
@@ -113,8 +124,8 @@ export const Logout = async (req, res) => {
   try {
     res.clearCookie("token", {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: process.env.NODE_ENV === "production" ? "none" : "strict"
+      secure: true,
+      sameSite: "none",
     });
 
     return res.json({ success: true, message: "Logout Successful" });
@@ -190,28 +201,30 @@ export const verifyEmail = async (req, res) => {
 };
 
 
-export const getMe = async (req, res, next) => {
+export const getMe = async (req, res) => {
+  console.log("Cookies:", req.cookies);
+
+  const token = req.cookies.token;
+
+  if (!token) {
+    return res.json({
+      loggedIn: false,
+      cookies: req.cookies
+    });
+  }
+
   try {
-    const token = req.cookies.token;
-
-    if (!token) {
-      return res.json({ loggedIn: false });
-    }
-
-    // verify token
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-
-    if (!decoded) {
-      return res.json({ loggedIn: false });
-    }
 
     return res.json({
       loggedIn: true,
-      user: decoded
+      user: decoded,
     });
-
-  } catch (error) {
-    return res.json({ loggedIn: false });
+  } catch (err) {
+    return res.json({
+      loggedIn: false,
+      error: err.message,
+    });
   }
 };
 export const getUser = async (req, res, next) => {

@@ -22,7 +22,7 @@ import errorHandler from "./src/middleware/errorMiddleware.js";
 connectDB();
 
 const app = express();
-
+app.set("trust proxy", 1);
 // Allowed frontend origins
 const allowedOrigins = [
 "http://localhost:5173",
